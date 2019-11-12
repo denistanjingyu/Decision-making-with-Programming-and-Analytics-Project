@@ -1,4 +1,4 @@
-# Decision-making-with-Programming-and-Analytics-Project
+# Decision making with Programming and Analytics Project
 Mike, CFO from New Ocean Trading, has long struggled to make sense out of the lengthy transactional records. The internal team who attempts to analyse the data often delivers outcomes that contradict with his anticipation. As such, he relies on his long-established business instinct to make business decision instead. Mike heard that you are good at analysing lengthy data and are well versed in Python Programming. He wishes to engage you to see what can be done to improve his department and understand the reason why the internal team may not be delivering what is expected. 
 
 He has brought with him 2 items for your analysis: 
