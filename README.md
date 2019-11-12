@@ -2,6 +2,7 @@
 Mike, CFO from New Ocean Trading, has long struggled to make sense out of the lengthy transactional records. The internal team who attempts to analyse the data often delivers outcomes that contradict with his anticipation. As such, he relies on his long-established business instinct to make business decision instead. Mike heard that you are good at analysing lengthy data and are well versed in Python Programming. He wishes to engage you to see what can be done to improve his department and understand the reason why the internal team may not be delivering what is expected. 
 
 He has brought with him 2 items for your analysis: 
+
  (1) The json file (cat_class.json) containing categorical classification information about their products, there are 8090 lines of stock internal serial number (StockISN) with its corresponding category codes. The following illustrates the first 10 lines of data. 
  
  (2) The second file (stockcards.xlsx) contains transactional records with more than 56000 lines of data covers the period from Jan 2011 to Apr 2019. The header information and first 10 records are shown below:
