@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 from dateutil.relativedelta import relativedelta  # relativedelta takes care of leap year
 
 ## Read in clean csv file
-clean_csv = pd.read_csv("C:\\Users\\user\\Desktop\\Year 2 NBS\\Semester 1\\BC0401 PROGRAMMING FOR BUSINESS ANALYTICS\\Project\\Clean_stockcards.csv")
+clean_csv = pd.read_csv("Clean_stockcards.csv")
 
 ## Format display float
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
