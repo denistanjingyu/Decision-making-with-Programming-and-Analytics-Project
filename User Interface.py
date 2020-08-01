@@ -1,4 +1,4 @@
-## Import libraries
+# Import libraries
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
@@ -13,7 +13,7 @@ from dateutil.relativedelta import relativedelta  # relativedelta takes care of 
 ## Read in clean csv file
 clean_csv = pd.read_csv("Clean_stockcards.csv")
 
-## Format display float
+# Format display float
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
 ############################# Start of Functions #####################################
