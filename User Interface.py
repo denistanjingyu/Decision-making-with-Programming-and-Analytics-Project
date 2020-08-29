@@ -10,7 +10,7 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 from dateutil.relativedelta import relativedelta  # relativedelta takes care of leap year
 
-## Read in clean csv file
+# Read in clean csv file
 clean_csv = pd.read_csv("Clean_stockcards.csv")
 
 # Format display float
@@ -18,10 +18,14 @@ pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
 ############################# Start of Functions #####################################
 def main():
-
+    """
+    Main Function
+    """
+    # Data type conversion and date sorting
     pd.to_numeric(clean_csv['Year'])
-    clean_csv['Date'] = pd.to_datetime(clean_csv['Date'], format='%Y-%m-%d').dt.date
-    clean_csv.sort_values('Date', inplace=True)
+    clean_csv['Date'] = pd.to_datetime(clean_csv['Date'], 
+                                       format = '%Y-%m-%d').dt.date
+    clean_csv.sort_values('Date', inplace = True)
 
     print("Welcome to New Ocean Trading Transactions Program!")
     i_pref = " "
@@ -42,7 +46,6 @@ Please choose 1, 2 or 3"""))
                 data = clean_csv.loc[clean_csv.Date >= start_date]
                 print(data)
                 print("Here are the data you requested from {} to {}.".format(start_date, last_date))
-
 
             elif i_pref == 2:
                 # Keep prompting user for min and max year till he get both inputs right
@@ -73,12 +76,10 @@ Please choose 1, 2 or 3"""))
                         print("Please input only valid years between {} to {}".format(min_date, max_date))
                         continue
 
-
             # Exit the program
             elif i_pref == 3:
                 print("Program will proceed to end!")
                 break
-
 
             # Number not 1, 2 or 3
             elif i_pref not in range(1, 4):
@@ -207,7 +208,6 @@ Input here-> """))
            continue
 
 # ------------------------------------ FINANCIAL OVERVIEW -----------------------------
-
 def graph_choice():
     while True:
         try:
@@ -245,7 +245,6 @@ Input here-> """))
 
     return choice
 
-
 def cluster_choice():
     while True:
         try:
@@ -262,8 +261,6 @@ Input here-> """))
             continue
 
     return choice
-
-
 
 def financial_overview():
     # Change display setting of print(pandas.DataFrame)
@@ -295,10 +292,8 @@ def financial_overview():
             plt.suptitle("Financial Overview by Year: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize = 13)
             plt.show()
             returnmain()
-
         else:
             returnmain()
-
     elif choice2 == 2:
         dataset = data.copy()
         df = dataset.groupby([dataset.Year, dataset.Month])["Amt", "Worth"].agg("sum").round(2)
@@ -326,10 +321,8 @@ def financial_overview():
                          fontsize=13)
             plt.show()
             returnmain()
-
         else:
             returnmain()
-
     elif choice2 == 3:
         dataset = data.copy()
         df = dataset[["Amt", "Worth"]].agg("sum").round(2)
@@ -424,7 +417,6 @@ def cust_summary():
         print("=======================================")
         returnmain()
 
-
 def transaction_trend():
     # Change display setting of print(pandas.DataFrame)
     pd.set_option('display.max_rows', 120)
@@ -491,18 +483,13 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                                                                                                   max(dataset.Date)),
                 fontsize=9)
 
-
             plt.show()
             returnmain()
-
         else:
             returnmain()
-
-
     elif choice2 == 2:
         dataset = data.copy()
         df = pd.DataFrame(columns=["Year", "Month", "NoT", "Mean NoT", "Median NoT", "Mode NoT", "Median QP per S", "Mode QP per S"])
-
         list_of_data = []
         list_of_years = sorted(dataset["Year"].unique())
         for index, year in enumerate(list_of_years):
@@ -511,7 +498,6 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             for index, month in enumerate(list_of_months):
                 month_data = year_data[year_data.Month == month]
                 list_of_data.append(month_data)
-
         for each in list_of_data:
             year_NoTrans = str(each["Year"].iloc[0])
             month_NoTrans = str(each["Month"].iloc[0])
@@ -544,15 +530,16 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             df["Year-Month"] = df["Year"] + "-" + df["Month"]
             df["NoT"] = df["NoT"].astype(int)
             df["Median QP per S"] = df["Median QP per S"].astype(int)
-
             fig, (ax1, ax2, ax3) = plt.subplots(3)
             fig.tight_layout(w_pad=1.4, h_pad=1.6)
-
             ax1.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="NoT", data=df, marker="8", ax=ax1).set_xticklabels(df["Year-Month"])
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "NoT", 
+                         data = df, 
+                         marker = "8", 
+                         ax=ax1).set_xticklabels(df["Year-Month"])
             ax1.set_ylabel("Number of Transactions", fontsize=7)
-            ax1.set_title("Customer Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize=9)
-
+            ax1.set_title("Customer Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize = 9)
             ax2.set_xticks(np.arange(len(df)))
             sns.lineplot(x=np.arange(len(df)), y="Median NoT", data=df, marker="8", ax=ax2, color="tomato").set_xticklabels(df["Year-Month"])
             ax2.set_ylabel("Median Number of Transactions", fontsize=7)
@@ -560,19 +547,21 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                 "The Average Customer's Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date),
                                                                                                   max(dataset.Date)),
                 fontsize=9)
-
             ax3.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median QP per S", data=df, marker="8", ax=ax3,color="darkturquoise").set_xticklabels(df["Year-Month"])
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median QP per S", 
+                         data = df, marker = "8", 
+                         ax = ax3,
+                         color = "darkturquoise").set_xticklabels(df["Year-Month"])
             ax3.set_ylabel("Median Quantity Purchased per StockISN", fontsize=7)
-            ax3.set_title("The Average Customer's Transaction Size across the Year-Months: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize=9)
+            ax3.set_title("The Average Customer's Transaction Size across the Year-Months: {} to {}".format(min(dataset.Date), 
+                                                                                                            max(dataset.Date)), 
+                                                                                                            fontsize = 9)
 
             plt.show()
             returnmain()
-
         else:
             returnmain()
-
-
     elif choice2 == 3:
         dataset = data.copy()
         print("""Customer Transaction Trends
@@ -589,7 +578,6 @@ Median Number of Transactions = {}
 Mode Number of Transactions: {}""".format(mean_NoTrans, median_NoTrans, mode_NoTrans))
         print("===============================================")
         returnmain()
-
 
 def purchase_trend():
     # Change display setting of print(pandas.DataFrame)
@@ -1231,7 +1219,6 @@ Input here-> """))
 def regional_analysis():
     # Convert all inf to nan values and remove those nans
     regional_data = data[data.replace([np.inf, -np.inf], np.nan).notnull()]
-
     while True:
         try:
             regional = regional_data.loc[:, ['CustomerRegion', 'Year', 'Month', 'Profit', 'Quantity']].sort_values(
@@ -1266,8 +1253,5 @@ Input -> """))
             print("Please enter 1, 2 or 3.")
             continue
 
-
 ###################################### End of Functions ###################################
-
 main()
-
