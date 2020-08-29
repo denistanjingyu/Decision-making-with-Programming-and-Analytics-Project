@@ -1,6 +1,7 @@
 # Import libraries
 import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action = 'ignore', 
+                      category = FutureWarning)
 import pandas as pd
 import numpy as np
 import os
@@ -129,10 +130,10 @@ Please choose an option:
 10) Profit & Quantity Summary by Customer Region
 11) End Programme
 Enter Your Input Here ->"""))
-           if mchoice==1:
+           if mchoice == 1:
                financial_overview()
                break
-           if mchoice ==2:
+           if mchoice == 2:
                cust_summary()
                break
            if mchoice == 3:
@@ -159,7 +160,7 @@ Enter Your Input Here ->"""))
            if mchoice == 10:
                regional_analysis()
                break
-           if mchoice==11:
+           if mchoice == 11:
                print("Program will proceed to end.")
                break
            else:
@@ -167,17 +168,18 @@ Enter Your Input Here ->"""))
                continue
        except ValueError:
            print("Input Invalid, Please Try Again")
+            
 def graphshow():
    while True:
        try:
-           choice=int(input("""Do you want to see in in graphical format?
+           choice = int(input("""Do you want to see in in graphical format?
 1) Yes
 2) No
 Input here-> """))
-           if choice==1:
+           if choice == 1:
                plt.show()
                break
-           if choice==2:
+           if choice == 2:
                print("Ok")
                break
            else:
@@ -242,7 +244,6 @@ Input here-> """))
         except ValueError:
             print("Please enter 1, 2 or 3.")
             continue
-
     return choice
 
 def cluster_choice():
@@ -259,23 +260,30 @@ Input here-> """))
         except ValueError:
             print("Please enter 1 or 2.")
             continue
-
     return choice
 
 def financial_overview():
     # Change display setting of print(pandas.DataFrame)
-    pd.set_option('display.max_rows', 120)
-    pd.set_option('display.width', 150)
-    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_rows', 
+                  120)
+    pd.set_option('display.width', 
+                  150)
+    pd.set_option('display.max_columns', 
+                  10)
 
     choice2 = group_choice()
     if choice2 == 1:
         dataset = data.copy()
         df = dataset.groupby(dataset.Year)["Amt", "Worth"].agg("sum").round(2)
         df["Total Profit (S$)"] = df["Amt"] - abs(df["Worth"])
-        df.rename(columns={'Amt': 'Total Revenue (S$)', 'Worth': 'Total Cost of Goods Sold (S$)'}, inplace=True)
+        df.rename(columns = {'Amt': 'Total Revenue (S$)', 
+                             'Worth': 'Total Cost of Goods Sold (S$)'}, 
+                  inplace = True)
         df['Year'] = df.index
-        df = df[['Year', 'Total Revenue (S$)', 'Total Cost of Goods Sold (S$)', 'Total Profit (S$)']]
+        df = df[['Year', 
+                 'Total Revenue (S$)', 
+                 'Total Cost of Goods Sold (S$)', 
+                 'Total Profit (S$)']]
         print("""Financial Overview
 =============================================================================
 {}""".format(df.to_string(index=False)))
@@ -283,42 +291,86 @@ def financial_overview():
         g_choice2 = graph_choice()
         if g_choice2 == 1:
             df["Total Cost of Goods Sold (S$)"] = abs(df["Total Cost of Goods Sold (S$)"])
-            sns.lineplot(x="Year", y="Total Revenue (S$)", data=df, marker = "8")
-            sns.lineplot(x="Year", y="Total Cost of Goods Sold (S$)", data=df, marker = "8")
-            sns.lineplot(x="Year", y="Total Profit (S$)", data=df, marker = "8")
-            plt.ticklabel_format(style='plain', axis='y')
-            plt.legend(labels=['Total Revenue', 'Absolute Value of Total Cost of Goods Sold', 'Total Profit'], loc=1, prop={'size': 8})
+            
+            sns.lineplot(x = "Year", 
+                         y = "Total Revenue (S$)", 
+                         data = df, 
+                         marker = "8")
+            
+            sns.lineplot(x = "Year", 
+                         y = "Total Cost of Goods Sold (S$)", 
+                         data = df, 
+                         marker = "8")
+            
+            sns.lineplot(x = "Year", 
+                         y = "Total Profit (S$)", 
+                         data = df, 
+                         marker = "8")
+            
+            plt.ticklabel_format(style = 'plain', 
+                                 axis = 'y')
+            
+            plt.legend(labels = ['Total Revenue', 
+                                 'Absolute Value of Total Cost of Goods Sold', 
+                                 'Total Profit'], 
+                       loc = 1, 
+                       prop = {'size': 8})
+            
             plt.ylabel("Singapore Dollars (S$)")
-            plt.suptitle("Financial Overview by Year: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize = 13)
+            
+            plt.suptitle("Financial Overview by Year: {} to {}".format(min(dataset.Date), 
+                                                                       max(dataset.Date)), 
+                         fontsize = 13)
             plt.show()
             returnmain()
         else:
             returnmain()
     elif choice2 == 2:
         dataset = data.copy()
-        df = dataset.groupby([dataset.Year, dataset.Month])["Amt", "Worth"].agg("sum").round(2)
+        df = dataset.groupby([dataset.Year, 
+                              dataset.Month])["Amt", "Worth"].agg("sum").round(2)
         df["Total Profit (S$)"] = df["Amt"] - abs(df["Worth"])
-        df.rename(columns={'Amt': 'Total Revenue (S$)', 'Worth': 'Total Cost of Goods Sold (S$)'}, inplace=True)
+        df.rename(columns = {'Amt': 'Total Revenue (S$)', 
+                             'Worth': 'Total Cost of Goods Sold (S$)'}, 
+                  inplace = True)
         df["Year-Month"] = [str(df.index[i][0]) + '-' + str(df.index[i][1]) for i in range(len(df))]
         df = df[['Year-Month', 'Total Revenue (S$)', 'Total Cost of Goods Sold (S$)', 'Total Profit (S$)']]
         print("""Financial Overview
 =============================================================================
-{}""".format(df.to_string(index=False)))
+{}""".format(df.to_string(index = False)))
 
         g_choice2 = graph_choice()
         if g_choice2 == 1:
             df["Total Cost of Goods Sold (S$)"] = abs(df["Total Cost of Goods Sold (S$)"])
             plt.xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Total Revenue (S$)", data=df, marker="8").set_xticklabels(df["Year-Month"])
-            sns.lineplot(x=np.arange(len(df)), y="Total Cost of Goods Sold (S$)", data=df, marker="8").set_xticklabels(df["Year-Month"])
-            sns.lineplot(x=np.arange(len(df)), y="Total Profit (S$)", data=df, marker="8").set_xticklabels(df["Year-Month"])
-            plt.ticklabel_format(style='plain', axis='y')
-            plt.legend(labels=['Total Revenue', 'Absolute Value of Total Cost of Goods Sold', 'Total Profit'], loc=1,
-                       prop={'size': 8})
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Total Revenue (S$)", 
+                         data = df, 
+                         marker = "8").set_xticklabels(df["Year-Month"])
+            
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Total Cost of Goods Sold (S$)", 
+                         data = df, 
+                         marker="8").set_xticklabels(df["Year-Month"])
+            
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Total Profit (S$)", 
+                         data = df, 
+                         marker = "8").set_xticklabels(df["Year-Month"])
+            
+            plt.ticklabel_format(style = 'plain', 
+                                 axis = 'y')
+            
+            plt.legend(labels=['Total Revenue', 
+                               'Absolute Value of Total Cost of Goods Sold', 
+                               'Total Profit'], 
+                       loc = 1,
+                       prop = {'size': 8})
             plt.ylabel("Singapore Dollars (S$)")
             plt.xlabel("Year-Month")
-            plt.suptitle("Financial Overview by Year-Month: {} to {}".format(min(dataset.Date), max(dataset.Date)),
-                         fontsize=13)
+            plt.suptitle("Financial Overview by Year-Month: {} to {}".format(min(dataset.Date), 
+                                                                             max(dataset.Date)),
+                         fontsize = 13)
             plt.show()
             returnmain()
         else:
@@ -327,7 +379,9 @@ def financial_overview():
         dataset = data.copy()
         df = dataset[["Amt", "Worth"]].agg("sum").round(2)
         df["Total Profit (S$)"] = df["Amt"] - abs(df["Worth"])
-        df.rename(index={'Amt': 'Total Revenue (S$)', 'Worth': 'Total Cost of Goods Sold (S$)'}, inplace=True)
+        df.rename(index = {'Amt': 'Total Revenue (S$)', 
+                           'Worth': 'Total Cost of Goods Sold (S$)'}, 
+                  inplace = True)
         print("""Financial Overview
 ==============================================
 {}""".format(df))
@@ -336,9 +390,12 @@ def financial_overview():
 # ------------------------------------CUSTOMER--------------------------------------------
 def cust_summary():
     # Change display setting of print(pandas.DataFrame)
-    pd.set_option('display.max_rows', 120)
-    pd.set_option('display.width', 300)
-    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_rows', 
+                  120)
+    pd.set_option('display.width', 
+                  300)
+    pd.set_option('display.max_columns', 
+                  10)
 
     choice2 = group_choice()
     if choice2 == 1:
@@ -347,20 +404,37 @@ def cust_summary():
         df = dataset.groupby(dataset.Year)["CustomerCode"].agg({'Unique Customers' : "nunique"})
 
         # Number of Transaction Type
-        df2 = dataset.groupby([dataset.Year, dataset.Type])["Type"].agg({"Count" : "count"}).reset_index()
-        df3 = df2.pivot(index='Year', columns='Type', values='Count')
-        df4 = df.merge(df3, left_on='Year', right_on='Year')
+        df2 = dataset.groupby([dataset.Year, 
+                               dataset.Type])["Type"].agg({"Count" : "count"}).reset_index()
+        
+        df3 = df2.pivot(index = 'Year', 
+                        columns = 'Type', 
+                        values = 'Count')
+        
+        df4 = df.merge(df3, 
+                       left_on = 'Year', 
+                       right_on = 'Year')
 
         # Number of Cur Type
         df5 = dataset.groupby([dataset.Year, dataset.Cur])["Cur"].agg({"Count": "count"}).reset_index()
-        df6 = df5.pivot(index='Year', columns='Cur', values='Count')
-        df7 = df4.merge(df6, left_on='Year', right_on='Year')
-        df7.rename(columns={'ICG': 'ICG Transactions',
-                            'ICX': 'ICX Transactions',
-                            'M$': "Transactions in M$",
-                            'S$': "Transactions in S$",
-                            'USD$': "Transactions in USD$"}, inplace=True)
-        df7.reset_index(level=0, inplace=True)
+        
+        df6 = df5.pivot(index = 'Year', 
+                        columns = 'Cur', 
+                        values = 'Count')
+        
+        df7 = df4.merge(df6, 
+                        left_on = 'Year', 
+                        right_on = 'Year')
+        
+        df7.rename(columns = {'ICG': 'ICG Transactions',
+                              'ICX': 'ICX Transactions',
+                              'M$': "Transactions in M$",
+                              'S$': "Transactions in S$",
+                              'USD$': "Transactions in USD$"}, 
+                   inplace = True)
+        
+        df7.reset_index(level = 0, 
+                        inplace = True)
         print("""Customer Information Summary 
                                                     Frequency Table
 ==========================================================================================================================
@@ -466,22 +540,43 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             df["NoT"] = df["NoT"].astype(int)
             df["Median QP per S"] = df["Median QP per S"].astype(int)
             fig, (ax1, ax2, ax3) = plt.subplots(3)
-            fig.tight_layout(w_pad=1.4, h_pad=1.6)
+            fig.tight_layout(w_pad = 1.4, h_pad = 1.6)
 
-            sns.lineplot(x="Year", y="NoT", data=df, marker="8", ax = ax1)
-            ax1.set_ylabel("Number of Transactions", fontsize = 7)
-            ax1.set_title("Customer Number of Transactions across the Years: {} to {}".format(min(dataset.Date), max(dataset.Date)),fontsize=9)
+            sns.lineplot(x = "Year", 
+                         y = "NoT", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax1)
+            ax1.set_ylabel("Number of Transactions", 
+                           fontsize = 7)
+            ax1.set_title("Customer Number of Transactions across the Years: {} to {}".format(min(dataset.Date), 
+                                                                                              max(dataset.Date)),
+                          fontsize = 9)
 
-            sns.lineplot(x="Year", y="Median NoT", data=df, marker="8", ax=ax2, color="tomato")
-            ax2.set_ylabel("Median Number of Transactions", fontsize = 7)
-            ax2.set_title("The Average Customer's Number of Transactions across the Years: {} to {}".format(min(dataset.Date), max(dataset.Date)),fontsize=9)
+            sns.lineplot(x = "Year", 
+                         y = "Median NoT", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax2, 
+                         color = "tomato")
+            ax2.set_ylabel("Median Number of Transactions", 
+                           fontsize = 7)
+            ax2.set_title("The Average Customer's Number of Transactions across the Years: {} to {}".format(min(dataset.Date), 
+                                                                                                            max(dataset.Date)),
+                          fontsize = 9)
 
-            sns.lineplot(x="Year", y="Median QP per S", data=df, marker="8", ax=ax3, color="darkturquoise")
-            ax3.set_ylabel("Median Quantity Purchased per StockISN", fontsize = 7)
+            sns.lineplot(x = "Year", 
+                         y = "Median QP per S", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax3, 
+                         color = "darkturquoise")
+            ax3.set_ylabel("Median Quantity Purchased per StockISN", 
+                           fontsize = 7)
             ax3.set_title(
                 "The Average Customer's Transaction Size across the Years: {} to {}".format(min(dataset.Date),
-                                                                                                  max(dataset.Date)),
-                fontsize=9)
+                                                                                            max(dataset.Date)),
+                fontsize = 9)
 
             plt.show()
             returnmain()
@@ -489,7 +584,14 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             returnmain()
     elif choice2 == 2:
         dataset = data.copy()
-        df = pd.DataFrame(columns=["Year", "Month", "NoT", "Mean NoT", "Median NoT", "Mode NoT", "Median QP per S", "Mode QP per S"])
+        df = pd.DataFrame(columns = ["Year", 
+                                     "Month", 
+                                     "NoT", 
+                                     "Mean NoT", 
+                                     "Median NoT", 
+                                     "Mode NoT", 
+                                     "Median QP per S", 
+                                     "Mode QP per S"])
         list_of_data = []
         list_of_years = sorted(dataset["Year"].unique())
         for index, year in enumerate(list_of_years):
@@ -507,15 +609,27 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             mode_NoTrans = str(list(each.groupby(each.CustomerCode).size().mode())).strip('[]')
 
             NoTrans_Qty = each.groupby(each.CustomerCode).size().to_frame()
-            NoTrans_Qty = NoTrans_Qty.rename(columns={0: 'NoTrans'})
+            NoTrans_Qty = NoTrans_Qty.rename(columns = {0: 'NoTrans'})
             each_Quantity = pd.DataFrame(each.groupby("CustomerCode").Quantity.sum())
-            each_Quantity = each_Quantity[each_Quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
-            NoTrans_Qty = pd.merge(NoTrans_Qty, each_Quantity, on='CustomerCode', how='left')
+            each_Quantity = each_Quantity[each_Quantity.replace([np.inf, 
+                                                                 -np.inf], 
+                                                                 np.nan).notnull().all(axis = 1)]
+            NoTrans_Qty = pd.merge(NoTrans_Qty, 
+                                   each_Quantity, 
+                                   on = 'CustomerCode', 
+                                   how = 'left')
             NoTrans_Qty["TransSize"] = NoTrans_Qty["Quantity"] / NoTrans_Qty["NoTrans"]
             median_TransSize = int(NoTrans_Qty.TransSize.median())
             mode_TransSize = str(list(NoTrans_Qty.TransSize.mode().astype(int))).strip('[]')
 
-            df_row = [year_NoTrans, month_NoTrans, No_Trans, mean_NoTrans, median_NoTrans, mode_NoTrans, median_TransSize, mode_TransSize]
+            df_row = [year_NoTrans, 
+                      month_NoTrans, 
+                      No_Trans, 
+                      mean_NoTrans, 
+                      median_NoTrans, 
+                      mode_NoTrans, 
+                      median_TransSize, 
+                      mode_TransSize]
             df.loc[len(df)] = df_row
 
         print("""Customer Transaction Trends
@@ -523,7 +637,7 @@ Number of Transactions (NoT)
 Transaction Size ~ Quantity Purchased per StockISN (QP per S)
 ===================================================================================================================
 {}
-===================================================================================================================""".format(df.to_string(index=False)))
+===================================================================================================================""".format(df.to_string(index = False)))
 
         g_choice2 = graph_choice()
         if g_choice2 == 1:
@@ -531,7 +645,8 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             df["NoT"] = df["NoT"].astype(int)
             df["Median QP per S"] = df["Median QP per S"].astype(int)
             fig, (ax1, ax2, ax3) = plt.subplots(3)
-            fig.tight_layout(w_pad=1.4, h_pad=1.6)
+            fig.tight_layout(w_pad = 1.4, 
+                             h_pad = 1.6)
             ax1.set_xticks(np.arange(len(df)))
             sns.lineplot(x = np.arange(len(df)), 
                          y = "NoT", 
@@ -539,24 +654,33 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                          marker = "8", 
                          ax=ax1).set_xticklabels(df["Year-Month"])
             ax1.set_ylabel("Number of Transactions", fontsize=7)
-            ax1.set_title("Customer Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date), max(dataset.Date)), fontsize = 9)
+            ax1.set_title("Customer Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date), 
+                                                                                                    max(dataset.Date)), 
+                          fontsize = 9)
             ax2.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median NoT", data=df, marker="8", ax=ax2, color="tomato").set_xticklabels(df["Year-Month"])
-            ax2.set_ylabel("Median Number of Transactions", fontsize=7)
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median NoT", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax2, 
+                         color = "tomato").set_xticklabels(df["Year-Month"])
+            ax2.set_ylabel("Median Number of Transactions", 
+                           fontsize = 7)
             ax2.set_title(
                 "The Average Customer's Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date),
-                                                                                                  max(dataset.Date)),
-                fontsize=9)
+                                                                                                        max(dataset.Date)),
+                fontsize = 9)
             ax3.set_xticks(np.arange(len(df)))
             sns.lineplot(x = np.arange(len(df)), 
                          y = "Median QP per S", 
                          data = df, marker = "8", 
                          ax = ax3,
                          color = "darkturquoise").set_xticklabels(df["Year-Month"])
-            ax3.set_ylabel("Median Quantity Purchased per StockISN", fontsize=7)
+            ax3.set_ylabel("Median Quantity Purchased per StockISN", 
+                           fontsize = 7)
             ax3.set_title("The Average Customer's Transaction Size across the Year-Months: {} to {}".format(min(dataset.Date), 
-                                                                                                            max(dataset.Date)), 
-                                                                                                            fontsize = 9)
+                                                                                                            max(dataset.Date)),                                         
+                          fontsize = 9)
 
             plt.show()
             returnmain()
@@ -575,22 +699,31 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
         print("""Across the Customers,
 Mean Number of Transactions = {}
 Median Number of Transactions = {}
-Mode Number of Transactions: {}""".format(mean_NoTrans, median_NoTrans, mode_NoTrans))
+Mode Number of Transactions: {}""".format(mean_NoTrans, 
+                                          median_NoTrans, 
+                                          mode_NoTrans))
         print("===============================================")
         returnmain()
 
 def purchase_trend():
     # Change display setting of print(pandas.DataFrame)
-    pd.set_option('display.max_rows', 120)
-    pd.set_option('display.width', 300)
-    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_rows', 
+                  120)
+    pd.set_option('display.width', 
+                  300)
+    pd.set_option('display.max_columns', 
+                  10)
 
     choice2 = group_choice()
     if choice2 == 1:
         dataset1 = data.copy()
-        df = pd.DataFrame(columns=["Year", "Total Quantity Purchased", "Median QP",
-                                   "Total Number of Unique StockISN", "Median NoUS",
-                                   "Mode NoUS", "Median QP per StockISN"])
+        df = pd.DataFrame(columns=["Year", 
+                                   "Total Quantity Purchased", 
+                                   "Median QP",
+                                   "Total Number of Unique StockISN", 
+                                   "Median NoUS",
+                                   "Mode NoUS", 
+                                   "Median QP per StockISN"])
 
         list_of_data = []
         list_of_years = sorted(dataset1["Year"].unique())
@@ -605,7 +738,9 @@ def purchase_trend():
             # Quantity Purchased
             dataset_Quantity = pd.DataFrame(dataset.groupby("CustomerCode").Quantity.sum())
             dataset_Quantity = dataset_Quantity[
-                dataset_Quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
+                dataset_Quantity.replace([np.inf, 
+                                          -np.inf], 
+                                          np.nan).notnull().all(axis=1)]
             total_Qty = int(dataset_Quantity.Quantity.sum())
             median_Qty = int(dataset_Quantity.Quantity.median())
 
@@ -620,12 +755,20 @@ def purchase_trend():
             dataset_Quantity = pd.DataFrame(dataset.groupby("CustomerCode").Quantity.sum())
             dataset_Quantity = dataset_Quantity[
                 dataset_Quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
-            NoStkType_Qty = pd.merge(NoStkType_Qty, dataset_Quantity, on='CustomerCode', how='left')
+            NoStkType_Qty = pd.merge(NoStkType_Qty, 
+                                     dataset_Quantity, 
+                                     on = 'CustomerCode', 
+                                     how = 'left')
             NoStkType_Qty["PurchaseVariety"] = NoStkType_Qty["Quantity"] / NoStkType_Qty["NoStkType"]
             median_PurchaseVariety = int(NoStkType_Qty.PurchaseVariety.median())
 
-            df_row = [year_purchase, total_Qty, median_Qty, total_NoStkType,
-                      median_NoStkType, mode_NoStkType, median_PurchaseVariety]
+            df_row = [year_purchase, 
+                      total_Qty, 
+                      median_Qty, 
+                      total_NoStkType,
+                      median_NoStkType, 
+                      mode_NoStkType, 
+                      median_PurchaseVariety]
             df.loc[len(df)] = df_row
 
         print("""Customer Purchase Trends
@@ -646,39 +789,68 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
             df["Median NoUS"] = df["Median NoUS"].astype(int)
             df["Median QP per StockISN"] = df["Median QP per StockISN"].astype(int)
             fig, ([ax1, ax2], [ax3, ax4], [ax5, ax6]) = plt.subplots(3, 2)
-            fig.tight_layout(w_pad=1.4, h_pad=1.4)
+            fig.tight_layout(w_pad = 1.4, 
+                             h_pad = 1.4)
 
-            sns.lineplot(x="Year", y="Total Quantity Purchased", data=df, marker="8", ax=ax1)
-            ax1.set_ylabel("Total Quantity Purchased", fontsize=6)
+            sns.lineplot(x = "Year", 
+                         y = "Total Quantity Purchased", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax1)
+            ax1.set_ylabel("Total Quantity Purchased", 
+                           fontsize = 6)
             ax1.set_title("Total Quantity Customer Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                                 max(dataset1.Date)),
-                          fontsize=9)
+                          fontsize = 9)
 
-            sns.lineplot(x="Year", y="Median QP", data=df, marker="8", ax=ax2)
-            ax2.set_ylabel("Median Quantity Purchased", fontsize=6)
+            sns.lineplot(x = "Year", 
+                         y = "Median QP", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax2)
+            ax2.set_ylabel("Median Quantity Purchased", 
+                           fontsize = 6)
             ax2.set_title(
                 "The Average Customer's Quantity Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                               max(dataset1.Date)),
-                fontsize=9)
+                fontsize = 9)
 
-            sns.lineplot(x="Year", y="Total Number of Unique StockISN", data=df, marker="8", ax=ax3, color="tomato")
-            ax3.set_ylabel("Total Number of Unique StockISN", fontsize=6)
+            sns.lineplot(x = "Year", 
+                         y = "Total Number of Unique StockISN", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax3, 
+                         color = "tomato")
+            ax3.set_ylabel("Total Number of Unique StockISN", 
+                           fontsize = 6)
             ax3.set_title(
                 "Number of Unique StockISN Customer Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                                  max(dataset1.Date)),
-                fontsize=9)
+                fontsize = 9)
 
-            sns.lineplot(x="Year", y="Median NoUS", data=df, marker="8", ax=ax4, color="tomato")
-            ax4.set_ylabel("Median Number of StockISN", fontsize=6)
-            ax4.set_title("The Average Customer's Number of StockISN Purchased across the Years: {} to {}".format(
-                min(dataset1.Date), max(dataset1.Date)), fontsize=9)
+            sns.lineplot(x = "Year", 
+                         y = "Median NoUS", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax4, 
+                         color = "tomato")
+            ax4.set_ylabel("Median Number of StockISN", 
+                           fontsize = 6)
+            ax4.set_title("The Average Customer's Number of StockISN Purchased across the Years: {} to {}".format(min(dataset1.Date), 
+                                                                                                                  max(dataset1.Date)), 
+                          fontsize = 9)
 
-            sns.lineplot(x="Year", y="Median QP per StockISN", data=df, marker="8", ax=ax5, color="darkturquoise")
-            ax5.set_ylabel("Median Quantity Purchased per StockISN", fontsize=6)
+            sns.lineplot(x = "Year", 
+                         y = "Median QP per StockISN", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax5, 
+                         color = "darkturquoise")
+            ax5.set_ylabel("Median Quantity Purchased per StockISN", 
+                           fontsize = 6)
             ax5.set_title("The Average Customer's Purchase Variety across the Years: {} to {}".format(min(dataset1.Date),
-                                                                                                      max(
-                                                                                                          dataset1.Date)),
-                          fontsize=9)
+                                                                                                      max(dataset1.Date)),
+                          fontsize = 9)
 
             plt.show()
             returnmain()
@@ -687,9 +859,14 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
 
     elif choice2 == 2:
         dataset1 = data.copy()
-        df = pd.DataFrame(columns=["Year", "Month", "Total Quantity Purchased", "Median QP",
-                                   "Total Number of Unique StockISN", "Median NoUS",
-                                   "Mode NoUS", "Median QP per StockISN"])
+        df = pd.DataFrame(columns = ["Year", 
+                                     "Month", 
+                                     "Total Quantity Purchased", 
+                                     "Median QP",
+                                     "Total Number of Unique StockISN", 
+                                     "Median NoUS",
+                                     "Mode NoUS", 
+                                     "Median QP per StockISN"])
 
         list_of_data = []
         list_of_years = sorted(dataset1["Year"].unique())
@@ -719,15 +896,26 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
 
             # Purchase Variety: Quantity Purchased per StockISN
             NoStkType_Qty = dataset.groupby("CustomerCode").StockISN.nunique().to_frame()
-            NoStkType_Qty = NoStkType_Qty.rename(columns={"StockISN": 'NoStkType'})
+            NoStkType_Qty = NoStkType_Qty.rename(columns = {"StockISN": 'NoStkType'})
             dataset_Quantity = pd.DataFrame(dataset.groupby("CustomerCode").Quantity.sum())
             dataset_Quantity = dataset_Quantity[
-                dataset_Quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
-            NoStkType_Qty = pd.merge(NoStkType_Qty, dataset_Quantity, on='CustomerCode', how='left')
+                dataset_Quantity.replace([np.inf, 
+                                          -np.inf], 
+                                          np.nan).notnull().all(axis = 1)]
+            NoStkType_Qty = pd.merge(NoStkType_Qty, 
+                                     dataset_Quantity, 
+                                     on = 'CustomerCode', 
+                                     how = 'left')
             NoStkType_Qty["PurchaseVariety"] = NoStkType_Qty["Quantity"] / NoStkType_Qty["NoStkType"]
             median_PurchaseVariety = int(NoStkType_Qty.PurchaseVariety.median())
-            df_row = [year_purchase, month_purchase, total_Qty, median_Qty, total_NoStkType,
-                      median_NoStkType, mode_NoStkType, median_PurchaseVariety]
+            df_row = [year_purchase, 
+                      month_purchase, 
+                      total_Qty, 
+                      median_Qty, 
+                      total_NoStkType,
+                      median_NoStkType, 
+                      mode_NoStkType, 
+                      median_PurchaseVariety]
             df.loc[len(df)] = df_row
 
         print("""Customer Purchase Trends
@@ -748,49 +936,72 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
             df["Median NoUS"] = df["Median NoUS"].astype(int)
             df["Median QP per StockISN"] = df["Median QP per StockISN"].astype(int)
             fig, ([ax1, ax2], [ax3, ax4], [ax5, ax6]) = plt.subplots(3, 2)
-            fig.tight_layout(w_pad=1.4, h_pad=1.4)
+            fig.tight_layout(w_pad = 1.4, h_pad = 1.4)
 
             ax1.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Total Quantity Purchased", data=df, marker="8",
-                         ax=ax1).set_xticklabels(df["Year-Month"])
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Total Quantity Purchased", 
+                         data = df, 
+                         marker = "8",
+                         ax = ax1).set_xticklabels(df["Year-Month"])
             ax1.set_ylabel("Total Quantity Purchased", fontsize=6)
             ax1.set_title("Total Quantity Customer Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                                 max(dataset1.Date)),
-                          fontsize=9)
+                          fontsize = 9)
 
             ax2.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median QP", data=df, marker="8", ax=ax2).set_xticklabels(
-                df["Year-Month"])
+            
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median QP", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax2).set_xticklabels(df["Year-Month"])
+                
             ax2.set_ylabel("Median Quantity Purchased", fontsize=6)
             ax2.set_title(
                 "The Average Customer's Quantity Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                               max(dataset1.Date)),
-                fontsize=9)
+                fontsize = 9)
 
             ax3.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Total Number of Unique StockISN", data=df, marker="8", ax=ax3,
-                         color="tomato").set_xticklabels(df["Year-Month"])
-            ax3.set_ylabel("Total Number of Unique StockISN", fontsize=6)
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Total Number of Unique StockISN", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax3,
+                         color = "tomato").set_xticklabels(df["Year-Month"])
+            ax3.set_ylabel("Total Number of Unique StockISN",
+                           fontsize = 6)
             ax3.set_title(
                 "Number of Unique StockISN Customer Purchased across the Years: {} to {}".format(min(dataset1.Date),
                                                                                                  max(dataset1.Date)),
-                fontsize=9)
+                fontsize = 9)
 
             ax4.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median NoUS", data=df, marker="8", ax=ax4,
-                         color="tomato").set_xticklabels(df["Year-Month"])
-            ax4.set_ylabel("Median Number of StockISN", fontsize=6)
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median NoUS", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax4,
+                         color = "tomato").set_xticklabels(df["Year-Month"])
+            ax4.set_ylabel("Median Number of StockISN", 
+                           fontsize = 6)
             ax4.set_title("The Average Customer's Number of StockISN Purchased across the Years: {} to {}".format(
-                min(dataset1.Date), max(dataset1.Date)), fontsize=9)
+                min(dataset1.Date), 
+                max(dataset1.Date)), 
+                          fontsize = 9)
 
             ax5.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median QP per StockISN", data=df, marker="8", ax=ax5,
-                         color="darkturquoise").set_xticklabels(df["Year-Month"])
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median QP per StockISN", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax5,
+                         color = "darkturquoise").set_xticklabels(df["Year-Month"])
             ax5.set_ylabel("Median Quantity Purchased per StockISN", fontsize=6)
             ax5.set_title("The Average Customer's Purchase Variety across the Years: {} to {}".format(min(dataset1.Date),
-                                                                                                      max(
-                                                                                                          dataset1.Date)),
-                          fontsize=9)
+                                                                                                      max(dataset1.Date)),                                                                
+                          fontsize = 9)
 
             plt.show()
             returnmain()
@@ -801,7 +1012,9 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
         dataset = data.copy()
         print("""Customer Purchase Trends
 ===============================================""")
-        dataset = dataset[dataset.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
+        dataset = dataset[dataset.replace([np.inf, 
+                                           -np.inf], 
+                                           np.nan).notnull().all(axis=1)]
         total_Qty = int(dataset["Quantity"].sum())
         median_Qty = int(dataset.groupby(dataset.CustomerCode)["Quantity"].sum().median())
         mode_Qty = list(dataset.groupby(dataset.CustomerCode)["Quantity"].sum().mode())
@@ -813,8 +1026,13 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
         NoStkType_Qty = dataset.groupby("CustomerCode").StockISN.nunique().to_frame()
         NoStkType_Qty = NoStkType_Qty.rename(columns={"StockISN": 'NoStkType'})
         dataset_Quantity = pd.DataFrame(dataset.groupby("CustomerCode").Quantity.sum())
-        dataset_Quantity = dataset_Quantity[dataset_Quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
-        NoStkType_Qty = pd.merge(NoStkType_Qty, dataset_Quantity, on='CustomerCode', how='left')
+        dataset_Quantity = dataset_Quantity[dataset_Quantity.replace([np.inf, 
+                                                                      -np.inf], 
+                                                                      np.nan).notnull().all(axis = 1)]
+        NoStkType_Qty = pd.merge(NoStkType_Qty, 
+                                 dataset_Quantity, 
+                                 on = 'CustomerCode', 
+                                 how = 'left')
         NoStkType_Qty["PurchaseVariety"] = NoStkType_Qty["Quantity"] / NoStkType_Qty["NoStkType"]
         median_PurchaseVariety = int(NoStkType_Qty.PurchaseVariety.median())
         mode_PurchaseVariety = list(NoStkType_Qty.PurchaseVariety.mode())
@@ -822,31 +1040,38 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
         print("Total Quantity Purchased = {}".format(total_Qty))
         print("""Across the Customers,
 Median of Quantity Purchased = {}
-Mode of Quantity Purchased: {}""".format(median_Qty, mode_Qty))
+Mode of Quantity Purchased: {}""".format(median_Qty, 
+                                         mode_Qty))
         print("-----------------------------------------------")
         print("Total Number of Unique Stock Purchased = {}".format(total_NoUS))
         print("""Across the Customers,
 Median Number of Unique Stock Purchased = {}
-Mode Number of Unique Stock Purchased: {}""".format(median_NoUS, mode_NoUS))
+Mode Number of Unique Stock Purchased: {}""".format(median_NoUS, 
+                                                    mode_NoUS))
         print("-----------------------------------------------")
         print("""Across the Customers,
 Median Purchase Variety (Quantity Purchased per StockISN) = {}
-Mode Number of Unique Stock Purchased: {}""".format(median_PurchaseVariety, mode_PurchaseVariety))
+Mode Number of Unique Stock Purchased: {}""".format(median_PurchaseVariety, 
+                                                    mode_PurchaseVariety))
         returnmain()
 
 
 def financial_trend():
     # Change display setting of print(pandas.DataFrame)
-    pd.set_option('display.max_rows', 120)
-    pd.set_option('display.width', 300)
-    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_rows', 
+                  120)
+    pd.set_option('display.width', 
+                  300)
+    pd.set_option('display.max_columns', 
+                  10)
 
     choice2 = group_choice()
     if choice2 == 1:
         dataset1 = data.copy()
-        df = pd.DataFrame(columns=["Year", "Median Revenue",
-                                   "Median Cost of Goods Sold",
-                                   "Median Profit"])
+        df = pd.DataFrame(columns = ["Year", 
+                                     "Median Revenue",
+                                     "Median Cost of Goods Sold",
+                                     "Median Profit"])
 
         list_of_data = []
         list_of_years = sorted(dataset1["Year"].unique())
@@ -859,15 +1084,21 @@ def financial_trend():
             year_finance = str(dataset["Year"].iloc[0])
 
             # Revenue
-            median_Rev = round(dataset.groupby(dataset.CustomerCode).Amt.sum().median(), 2)
+            median_Rev = round(dataset.groupby(dataset.CustomerCode).Amt.sum().median(), 
+                               2)
 
             # Cost
-            median_Cost = round(dataset.groupby(dataset.CustomerCode).Worth.sum().median(), 2)
+            median_Cost = round(dataset.groupby(dataset.CustomerCode).Worth.sum().median(), 
+                                2)
 
             # Profit
-            median_Profit = round(dataset.groupby(dataset.CustomerCode).Profit.sum().median(), 2)
+            median_Profit = round(dataset.groupby(dataset.CustomerCode).Profit.sum().median(), 
+                                  2)
 
-            df_row = [year_finance, median_Rev, median_Cost, median_Profit]
+            df_row = [year_finance, 
+                      median_Rev, 
+                      median_Cost, 
+                      median_Profit]
             df.loc[len(df)] = df_row
 
         print("""Customer Financial Trends
@@ -882,36 +1113,54 @@ def financial_trend():
             df["Median Cost of Goods Sold"] = abs(df["Median Cost of Goods Sold"].astype(float))
             df["Median Profit"] = df["Median Profit"].astype(float)
             fig, (ax1, ax2, ax3) = plt.subplots(3)
-            fig.tight_layout(w_pad=1.4, h_pad=1.6)
+            fig.tight_layout(w_pad = 1.4, 
+                             h_pad = 1.6)
 
-            sns.lineplot(x="Year", y="Median Revenue", data=df, marker="8", ax=ax1)
-            ax1.set_ylabel("Median Revenue", fontsize=9)
+            sns.lineplot(x = "Year", 
+                         y = "Median Revenue", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax1)
+            ax1.set_ylabel("Median Revenue", 
+                           fontsize = 9)
             ax1.set_title("The Average Customer's Revenue across the Years: {} to {}".format(min(dataset1.Date),
                                                                                              max(dataset1.Date)),
-                          fontsize=10)
+                          fontsize = 10)
 
-            sns.lineplot(x="Year", y="Median Cost of Goods Sold", data=df, marker="8", ax=ax2, color="tomato")
-            ax2.set_ylabel("Median Customer Absolute Cost of Goods Sold", fontsize=7)
+            sns.lineplot(x = "Year", 
+                         y = "Median Cost of Goods Sold", 
+                         data = df,
+                         marker = "8", 
+                         ax = ax2, 
+                         color = "tomato")
+            ax2.set_ylabel("Median Customer Absolute Cost of Goods Sold", 
+                           fontsize = 7)
             ax2.set_title(
                 "The Average Customer's Cost of Goods Sold across the Years: {} to {}".format(min(dataset1.Date),
                                                                                               max(dataset1.Date)),
-                fontsize=10)
+                fontsize = 10)
 
-            sns.lineplot(x="Year", y="Median Profit", data=df, marker="8", ax=ax3, color="darkturquoise")
-            ax3.set_ylabel("Median Customer Profit", fontsize=9)
+            sns.lineplot(x = "Year", 
+                         y = "Median Profit", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax3, 
+                         color = "darkturquoise")
+            ax3.set_ylabel("Median Customer Profit", 
+                           fontsize = 9)
             ax3.set_title("The Average Customer's Profit across the Years: {} to {}".format(min(dataset1.Date),
                                                                                             max(dataset1.Date)),
-                          fontsize=10)
+                          fontsize = 10)
 
             plt.show()
             returnmain()
         else:
             returnmain()
 
-
     elif choice2 == 2:
         dataset1 = data.copy()
-        df = pd.DataFrame(columns=["Year", "Month", "Median Revenue",
+        df = pd.DataFrame(columns=["Year", "Month", 
+                                   "Median Revenue",
                                    "Median Cost of Goods Sold",
                                    "Median Profit"])
 
@@ -938,7 +1187,11 @@ def financial_trend():
             # Profit
             median_Profit = dataset.groupby(dataset.CustomerCode).Profit.sum().median().round(2)
 
-            df_row = [year_finance, month_finance, median_Rev, median_Cost, median_Profit]
+            df_row = [year_finance, 
+                      month_finance, 
+                      median_Rev, 
+                      median_Cost, 
+                      median_Profit]
             df.loc[len(df)] = df_row
 
         print("""Customer Financial Trends
@@ -953,41 +1206,64 @@ def financial_trend():
             df["Median Cost of Goods Sold"] = abs(df["Median Cost of Goods Sold"].astype(float))
             df["Median Profit"] = df["Median Profit"].astype(float)
             fig, (ax1, ax2, ax3) = plt.subplots(3)
-            fig.tight_layout(w_pad=1.4, h_pad=1.6)
+            fig.tight_layout(w_pad = 1.4, 
+                             h_pad = 1.6)
 
             ax1.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median Revenue", data=df, marker="8", ax=ax1).set_xticklabels(
-                df["Year-Month"])
-            ax1.set_ylabel("Median Revenue", fontsize=9)
-            ax1.set_xlabel("Year-Month", fontsize=9)
+            
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median Revenue", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax1).set_xticklabels(df["Year-Month"])
+                
+            ax1.set_ylabel("Median Revenue", 
+                           fontsize = 9)
+            ax1.set_xlabel("Year-Month", 
+                           fontsize = 9)
             ax1.set_title("The Average Customer's Revenue across the Year-Months: {} to {}".format(min(dataset1.Date),
                                                                                                    max(dataset1.Date)),
-                          fontsize=10)
+                          fontsize = 10)
 
             ax2.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median Cost of Goods Sold", data=df, marker="8", ax=ax2,
+            
+            sns.lineplot(x = np.arange(len(df)), 
+                         y = "Median Cost of Goods Sold", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax2,
                          color="tomato").set_xticklabels(df["Year-Month"])
-            ax2.set_ylabel("Median Customer Absolute Cost of Goods Sold", fontsize=7)
-            ax2.set_xlabel("Year-Month", fontsize=9)
+            
+            ax2.set_ylabel("Median Customer Absolute Cost of Goods Sold", 
+                           fontsize = 7)
+            ax2.set_xlabel("Year-Month", 
+                           fontsize = 9)
             ax2.set_title(
                 "The Average Customer's Cost of Goods Sold across the Year-Months: {} to {}".format(min(dataset1.Date),
                                                                                                     max(dataset1.Date)),
-                fontsize=10)
+                fontsize = 10)
 
             ax3.set_xticks(np.arange(len(df)))
-            sns.lineplot(x=np.arange(len(df)), y="Median Profit", data=df, marker="8", ax=ax3,
-                         color="darkturquoise").set_xticklabels(df["Year-Month"])
-            ax3.set_ylabel("Median Customer Profit", fontsize=9)
-            ax3.set_xlabel("Year-Month", fontsize=9)
+            
+            sns.lineplot(x=np.arange(len(df)), 
+                         y = "Median Profit", 
+                         data = df, 
+                         marker = "8", 
+                         ax = ax3,
+                         color = "darkturquoise").set_xticklabels(df["Year-Month"])
+            
+            ax3.set_ylabel("Median Customer Profit", 
+                           fontsize = 9)
+            ax3.set_xlabel("Year-Month", 
+                           fontsize = 9)
             ax3.set_title("The Average Customer's Profit across the Year-Month: {} to {}".format(min(dataset1.Date),
                                                                                                  max(dataset1.Date)),
-                          fontsize=10)
+                          fontsize = 10)
 
             plt.show()
             returnmain()
         else:
             returnmain()
-
 
     elif choice2 == 3:
         dataset = data.copy()
@@ -1007,15 +1283,18 @@ def financial_trend():
 
         print("""Across the Customers,
 Median Revenue = {}
-Mode Revenue: {}""".format(median_Rev, mode_Rev))
+Mode Revenue: {}""".format(median_Rev, 
+                           mode_Rev))
         print("-----------------------------------------------")
         print("""Across the Customers,
 Median Cost of Goods Sold = {}
-Mode Cost of Goods Sold: {}""".format(median_Cost, mode_Cost))
+Mode Cost of Goods Sold: {}""".format(median_Cost, 
+                                      mode_Cost))
         print("-----------------------------------------------")
         print("""Across the Customers,
 Median Profit = {}
-Mode Profit: {}""".format(median_Profit, mode_Profit))
+Mode Profit: {}""".format(median_Profit, 
+                          mode_Profit))
         print("-----------------------------------------------")
         returnmain()
 
@@ -1025,19 +1304,25 @@ def cluster_analysis():
     endyear = dataset.iloc[-1].Year
     num_of_plots = endyear - startyear
     start = startyear
-    fig, ax = plt.subplots(3, 3, sharex=True, sharey=True)
-    fig.set_size_inches(5.5, 3)
-    fig.tight_layout(w_pad=1.5, h_pad=1.5)
+    fig, ax = plt.subplots(3, 
+                           3, 
+                           sharex = True, 
+                           sharey = True)
+    fig.set_size_inches(5.5, 
+                        3)
+    fig.tight_layout(w_pad = 1.5, 
+                     h_pad = 1.5)
     fig.suptitle('Customer Profit-Quantity Cluster Analysis across the Years: {} to {}'.format(min(dataset.Date),
-                                                                                                 max(dataset.Date)), fontsize=12)
-    fig.subplots_adjust(top=0.88)
+                                                                                               max(dataset.Date)), 
+                 fontsize = 12)
+    fig.subplots_adjust(top = 0.88)
     c_choice = cluster_choice()
 
     for i in range(num_of_plots + 1):
-        #Based on user input, subset the df with only those years and group by customer code
-        #Sum up the profit and quantity for each customer for the year
-        #Remove customers with profit/quantity = 0. This is probably because they do not exist during that year. Possible that customer legit had profit of 0 but the chances are very low.
-        #Given that profit and quantity subsets eventually have the same length, no customers were wrongly removed. i.e. customer exists but 0 profit
+        # Based on user input, subset the df with only those years and group by customer code
+        # Sum up the profit and quantity for each customer for the year
+        # Remove customers with profit/quantity = 0. This is probably because they do not exist during that year. Possible that customer legit had profit of 0 but the chances are very low.
+        # Given that profit and quantity subsets eventually have the same length, no customers were wrongly removed. i.e. customer exists but 0 profit
         cust_profit = dataset.loc[dataset.Year == start].groupby('CustomerCode').Profit.sum()
         cust_profit = cust_profit[cust_profit != 0]
         cust_profit.head()
@@ -1046,48 +1331,66 @@ def cluster_analysis():
         cust_quantity = cust_quantity[cust_quantity != 0]
         cust_quantity.head()
 
-        #Create a dataframe combining both profit and quantity
-        profit_quantity = pd.DataFrame({'Profit':cust_profit, 'Quantity': cust_quantity})
+        # Create a dataframe combining both profit and quantity
+        profit_quantity = pd.DataFrame({'Profit': cust_profit, 
+                                        'Quantity': cust_quantity})
         profit_quantity['CustomerCode'] = profit_quantity.index
         profit_quantity
 
-        #Remove all infinity and nan values. These are mostly caused by division by zero errors.
+        # Remove all infinity and nan values. These are mostly caused by division by zero errors.
         profit_quantity = profit_quantity[profit_quantity.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)]
         profit_quantity
 
-        #Instantiate kmeans and fit the dataframe
-        #Number of clusters can be based on the elbow graph or based on domain knowledge instead of statistical opinions
+        # Instantiate kmeans and fit the dataframe
+        # Number of clusters can be based on the elbow graph or based on domain knowledge instead of statistical opinions
         kmeans = KMeans(n_clusters = 4, random_state = 0).fit(profit_quantity[["Profit", "Quantity"]])
 
-        #View the label for each customer
-        #View the cluster center coordinates for each cluster
+        # View the label for each customer
+        # View the cluster center coordinates for each cluster
         kmeans.labels_
         kmeans.cluster_centers_
 
         if c_choice == 1:
-        #Plot the final clustering
+        # Plot the final clustering
             row, col = int(i / 3), i % 3
-            ax[row,col].scatter(profit_quantity.Profit, profit_quantity.Quantity, s = 3, c = kmeans.labels_, cmap = 'rainbow', marker= "D")
+            ax[row,col].scatter(profit_quantity.Profit, 
+                                profit_quantity.Quantity, 
+                                s = 3, 
+                                c = kmeans.labels_, 
+                                cmap = 'rainbow', 
+                                marker = "D")
             ax[row,col].set_xlabel("Profit")
             ax[row,col].set_ylabel("Quantity")
             ax[row,col].set_title("Cluster Plot for Year {}".format(start))
-            ax[row,col].xaxis.set_tick_params(which='both', labelbottom=True)
-            ax[row, col].yaxis.set_tick_params(which='both', labelbottom=True)
+            ax[row,col].xaxis.set_tick_params(which = 'both', 
+                                              labelbottom = True)
+            ax[row, col].yaxis.set_tick_params(which = 'both', 
+                                               labelbottom = True)
+            
             # Label Customer Code on each scatter point
             for i, txt in enumerate(profit_quantity.CustomerCode):
-                ax[row, col].annotate(txt, (profit_quantity.Profit[i], profit_quantity.Quantity[i]))
-            #Update next plot title by increasing 1 year
+                ax[row, col].annotate(txt, 
+                                      (profit_quantity.Profit[i], 
+                                       profit_quantity.Quantity[i]))
+                
+            # Update next plot title by increasing 1 year
             start += 1
 
         elif c_choice == 2:
             row, col = int(i / 3), i % 3
-            ax[row, col].scatter(profit_quantity.Profit, profit_quantity.Quantity, s=3, c=kmeans.labels_,
-                                 cmap='rainbow', marker="D")
+            ax[row, col].scatter(profit_quantity.Profit, 
+                                 profit_quantity.Quantity, 
+                                 s = 3, 
+                                 c = kmeans.labels_,
+                                 cmap = 'rainbow', 
+                                 marker = "D")
             ax[row, col].set_xlabel("Profit")
             ax[row, col].set_ylabel("Quantity")
             ax[row, col].set_title("Cluster Plot for Year {}".format(start))
-            ax[row, col].xaxis.set_tick_params(which='both', labelbottom=True)
-            ax[row, col].yaxis.set_tick_params(which='both', labelbottom=True)
+            ax[row, col].xaxis.set_tick_params(which = 'both', 
+                                               labelbottom = True)
+            ax[row, col].yaxis.set_tick_params(which = 'both', 
+                                               labelbottom = True)
             # Update next plot title by increasing 1 year
             start += 1
 
@@ -1106,7 +1409,10 @@ def LeastprofitableStocks():
 3) NIL
 Input here-> """))
            if choice == 1:
-               stock_profit32 = stock_profit32.groupby(['StockISN','Year'], as_index=False)[['Quantity','Profit']].sum()
+               stock_profit32 = stock_profit32.groupby(['StockISN',
+                                                        'Year'], 
+                                                       as_index = False)[['Quantity',
+                                                                          'Profit']].sum()
                for i in stock_profit32.Year.unique():
                    print("For Year {} the bottom 5 stocks are:".format(i))
                    print(stock_profit32[stock_profit32.Year == i].nsmallest(5, 'Profit'))
@@ -1141,47 +1447,72 @@ def topfivesoldstocks():
 3) NIL
 Input here-> """))
            if choice == 1:
-               fig, ax = plt.subplots(3, 3)
-               fig.set_size_inches(5.5, 3)
-               fig.tight_layout(w_pad=1.5, h_pad=1.5)
-               stock_isn3 = stock_isn3.groupby(['StockISN','Year'], as_index=False)[['Quantity','Profit']].sum()
-               a=0
+               fig, ax = plt.subplots(3, 
+                                      3)
+               fig.set_size_inches(5.5, 
+                                   3)
+               fig.tight_layout(w_pad = 1.5,
+                                h_pad = 1.5)
+               stock_isn3 = stock_isn3.groupby(['StockISN','Year'], 
+                                               as_index = False)[['Quantity',
+                                                                  'Profit']].sum()
+               a = 0
                for i in stock_isn3.Year.unique():
                    print("For Year {} the top 5 stocks are:".format(i))
-                   print(stock_isn3[stock_isn3.Year == i].nlargest(5, 'Quantity'))
-                   tempprint=stock_isn3[stock_isn3.Year == i].nlargest(5, 'Quantity')
-                   a+=1
-                   row, col = int(a / 3), a% 3
-                   ax[row, col].bar(tempprint.StockISN,tempprint.Quantity,color="#00BFC4")
+                   print(stock_isn3[stock_isn3.Year == i].nlargest(5, 
+                                                                   'Quantity'))
+                   tempprint=stock_isn3[stock_isn3.Year == i].nlargest(5, 
+                                                                       'Quantity')
+                   a += 1
+                   row, col = int(a / 3), a % 3
+                   ax[row, col].bar(tempprint.StockISN,
+                                    tempprint.Quantity,
+                                    color = "#00BFC4")
                    ax[row, col].set_xticks(tempprint.StockISN)
                graphshow()
                break
+                
            elif choice == 2:
-               stock_isn3 = stock_isn3.groupby(['StockISN', 'Month'],as_index=False)[['Quantity', 'Profit']].sum()
+               stock_isn3 = stock_isn3.groupby(['StockISN', 'Month'],
+                                               as_index = False)[['Quantity', 
+                                                                  'Profit']].sum()
                for i in stock_isn3.Month.unique():
                    print("For Month {} the top 5 stocks are:".format(i))
-                   print(stock_isn3[stock_isn3.Month == i].nlargest(5, 'Quantity'))
+                   print(stock_isn3[stock_isn3.Month == i].nlargest(5, 
+                                                                    'Quantity'))
                break
+            
            elif choice == 3:
-               stock_isn3=stock_isn3.groupby('StockISN',as_index=False)[['Quantity','Profit']].sum()
+               stock_isn3 = stock_isn3.groupby('StockISN',
+                                               as_index = False)[['Quantity',
+                                                                  'Profit']].sum()
                print("The top 10 most sold items in the timeframe is:")
-               print(stock_isn3.nlargest(10, "Quantity"))
-               tempprint = stock_isn3.nlargest(10, 'Quantity')
-               plt.scatter(tempprint.StockISN,tempprint.Quantity,color="#00BFC4")
+               print(stock_isn3.nlargest(10, 
+                                         "Quantity"))
+               tempprint = stock_isn3.nlargest(10, 
+                                               'Quantity')
+               plt.scatter(tempprint.StockISN,
+                           tempprint.Quantity,
+                           color = "#00BFC4")
                graphshow()
                break
+                
            else:
                print("Please enter 1, 2 or 3")
                continue
+            
        except ValueError:
            print("Please enter 1, 2 or 3")
            continue
    returnmain()
 
-
 def topfiveprofitstocks():
-   stock_profit3 = data[data['Profit'].replace([np.inf, -np.inf], np.nan).notnull()]
-   stock_profit3 = stock_profit3[stock_profit3['Quantity'].replace([np.inf, -np.inf], np.nan).notnull()]
+   stock_profit3 = data[data['Profit'].replace([np.inf, 
+                                                -np.inf], 
+                                                np.nan).notnull()]
+   stock_profit3 = stock_profit3[stock_profit3['Quantity'].replace([np.inf, 
+                                                                    -np.inf], 
+                                                                    np.nan).notnull()]
    while True:
        try:
            choice = int(input("""What do you want to group the dataset by?
@@ -1190,21 +1521,32 @@ def topfiveprofitstocks():
 3) NIL
 Input here-> """))
            if choice == 1:
-               stock_profit3 = stock_profit3.groupby(['StockISN','Year'], as_index=False)[['Quantity','Profit']].sum()
+               stock_profit3 = stock_profit3.groupby(['StockISN',
+                                                      'Year'], 
+                                                      as_index = False)[['Quantity',
+                                                                         'Profit']].sum()
                for i in stock_profit3.Year.unique():
                    print("For Year {} the top 5 stocks are:".format(i))
-                   print(stock_profit3[stock_profit3.Year == i].nlargest(5, 'Profit'))
+                   print(stock_profit3[stock_profit3.Year == i].nlargest(5, 
+                                                                         'Profit'))
                break
            elif choice == 2:
-               stock_profit3 = stock_profit3.groupby(['StockISN','Month'], as_index=False)[['Quantity','Profit']].sum()
+               stock_profit3 = stock_profit3.groupby(['StockISN',
+                                                      'Month'], 
+                                                     as_index = False)[['Quantity',
+                                                                        'Profit']].sum()
                for i in stock_profit3.Month.unique():
                    print("For Month {} the top 5 stocks are:".format(i))
-                   print(stock_profit3[stock_profit3.Month == i].nlargest(5, 'Profit'))
+                   print(stock_profit3[stock_profit3.Month == i].nlargest(5, 
+                                                                          'Profit'))
                break
            elif choice == 3:
-               stock_profit3=stock_profit3.groupby('StockISN',as_index=False)[['Quantity','Profit']].sum()
+               stock_profit3 = stock_profit3.groupby('StockISN',
+                                                     as_index = False)[['Quantity',
+                                                                        'Profit']].sum()
                print("The top 10 most sold items in the timeframe is:")
-               print(stock_profit3.nlargest(10, "Profit"))
+               print(stock_profit3.nlargest(10, 
+                                            "Profit"))
                break
            else:
                print("Please enter 1, 2 or 3")
@@ -1218,37 +1560,54 @@ Input here-> """))
 
 def regional_analysis():
     # Convert all inf to nan values and remove those nans
-    regional_data = data[data.replace([np.inf, -np.inf], np.nan).notnull()]
+    regional_data = data[data.replace([np.inf, 
+                                       -np.inf], 
+                                       np.nan).notnull()]
     while True:
         try:
-            regional = regional_data.loc[:, ['CustomerRegion', 'Year', 'Month', 'Profit', 'Quantity']].sort_values(
-                ['CustomerRegion', 'Year', 'Month'])
+            regional = regional_data.loc[:, ['CustomerRegion', 
+                                             'Year', 
+                                             'Month', 
+                                             'Profit', 
+                                             'Quantity']].sort_values( ['CustomerRegion', 
+                                                                        'Year', 
+                                                                        'Month'])
+               
             choice = int(input("""What do you want to group the dataset by?
 1) Year
 2) Year and Month
 3) NIL
 Input -> """))
             if choice == 1:
-                rp_cust_reg_year = regional.groupby(['CustomerRegion', 'Year'])[['Profit', 'Quantity']].sum()
+                rp_cust_reg_year = regional.groupby(['CustomerRegion', 
+                                                     'Year'])[['Profit', 
+                                                               'Quantity']].sum()
                 rp_cust_reg_year = pd.DataFrame(rp_cust_reg_year)
                 rp_cust_reg_year.reset_index(inplace=True)
                 print(rp_cust_reg_year)
                 returnmain()
                 break
+                
             elif choice == 2:
-                rp_cust_reg_ymonth = regional.groupby(['CustomerRegion', 'Year', 'Month'])[['Profit', 'Quantity']].sum()
+                rp_cust_reg_ymonth = regional.groupby(['CustomerRegion', 
+                                                       'Year', 
+                                                       'Month'])[['Profit', 
+                                                                  'Quantity']].sum()
                 rp_cust_reg_ymonth = pd.DataFrame(rp_cust_reg_ymonth)
-                rp_cust_reg_ymonth.reset_index(inplace=True)
+                rp_cust_reg_ymonth.reset_index(inplace = True)
                 print(rp_cust_reg_ymonth)
                 returnmain()
                 break
+                
             else:
-                rp_cust_reg = regional.groupby('CustomerRegion')[['Profit', 'Quantity']].sum()
+                rp_cust_reg = regional.groupby('CustomerRegion')[['Profit', 
+                                                                  'Quantity']].sum()
                 rp_cust_reg = pd.DataFrame(rp_cust_reg)
-                rp_cust_reg.reset_index(inplace=True)
+                rp_cust_reg.reset_index(inplace = True)
                 print(rp_cust_reg)
                 returnmain()
                 break
+                
         except ValueError:
             print("Please enter 1, 2 or 3.")
             continue
