@@ -192,8 +192,8 @@ summarizes the data appropriate for reading, statistical summary could also be a
        - Forecasted the general quantities of all stock sold for the upcoming years. 
        - From this, New Ocean Trading can observe the forecast for upcoming quantity of stocks sold in each period to estimate the general number of all items to stock up in anticipation of the upcoming demand.
        - Due to their significance and high impact on the company’s revenue and profits, forecasted the quantities of stock sold for the top 5 most sold stocks, as well as the top 5 most profitable stocks. For example, for product StkISN 10074, demand starts to peak during 2019 Q3 at 88,000 predicted quantity sold, hence the company can begin stock up in 2019 Q2. This is to avoid stock out costs of:
-1) Missing out on sales of profitable products
-2) Potentially losing sales or losing customers due to unavailability of popular products.
+         - Missing out on sales of profitable products
+         - Potentially losing sales or losing customers due to unavailability of popular products.
        - New Ocean Trading can follow the forecast and stock up before every peak in quantities sold.
 
 
