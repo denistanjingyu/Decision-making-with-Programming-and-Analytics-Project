@@ -76,3 +76,8 @@ summarizes the data appropriate for reading, statistical summary could also be a
      | Period 3 | 28 April 2016 - 27 April 2017 | 
      | Period 4 | 28 April 2017 - 27 April 2018 |
      | Period 5 | 28 April 2018 - 27 April 2019 |
+     
+   - Profit Analysis by Periods
+   
+     ![image](https://user-images.githubusercontent.com/45563371/91668741-82517700-eb41-11ea-99f7-4b8c1bcb1492.png)
+
