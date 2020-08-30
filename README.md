@@ -86,3 +86,15 @@ summarizes the data appropriate for reading, statistical summary could also be a
        - Moreover, from period 3 onwards, there was a declining trend in profit percentages from 18.83% to 13.88% which indicates that customers are purchasing more products that have lower profitability margin while purchasing lower quantities of high-margin products. Products could also have rising overall costs to sell.
      - Impact on Customer Loyalty Program
        - New Ocean Trading can encourage the sales of higher margin products to customers through trade and shipping discounts or promotions, provide higher tier rewards to customers who purchase high-margin products and lower tier rewards to customers who purchase low-margin products.
+       
+   - Revenue by Month
+     
+     ![image](https://user-images.githubusercontent.com/45563371/91668795-060b6380-eb42-11ea-8b82-96372a7af61f.png)
+
+     - Observation
+       - Across the 5 periods, there are three significant increases in monthly revenue in every period, namely from February to March, April to May and from November to December, whereas there is a significant decrease in each period from January to February.
+     - Impact on Customer Loyalty Program
+       - Time-specific promotions can be offered to encourage businesses to transact more during February to increase revenue. 
+       - High-margin products can also be promoted more during March, May and December to take advantage of the high spending behaviour of customers.
+     - Impact on Stock Up Timing
+       - March, May and December are high revenue months, hence the company should begin stocking up popular items in the prior months during February, April and November, in preparation for upcoming high demand.
