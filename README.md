@@ -197,6 +197,15 @@ summarizes the data appropriate for reading, statistical summary could also be a
        - New Ocean Trading can follow the forecast and stock up before every peak in quantities sold.
 
 ### Command Line User Interface
+- The objective of the command line user interface (UI) is to provide New Ocean Trading a platform to easily visualise and understand their transactional records. Users can utilise our UI to view information about finances, customers, geographical distribution and stock in their transactions.
+- Design Process
+  
+  |**SNo**|**Functions Required**                                   | **Design Intention**                                                                                      |
+  |-------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+  | 1     | Selection of transactional records data for examination | The program is designed for users to have flexibility in choosing their dataset by time frame             |
+  | 2     | Selection of transaction variables to analyse           | The program will focus on variables useful for New Ocean Trading’s business objectives                    |
+  | 3     | Summary and analysis of variables                       | Create functions that will display summary, trends and insights on important elements in variables        |
+  | 4     | Different view options for the summaries and analysis   | Include additional view options that allow users better visualisation like graphs or descriptive statistic|
 
    
 
