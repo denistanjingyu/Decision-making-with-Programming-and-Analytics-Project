@@ -223,6 +223,16 @@ summarizes the data appropriate for reading, statistical summary could also be a
 
   ![image](https://user-images.githubusercontent.com/45563371/91669280-44a31d00-eb46-11ea-9c67-3eefc70948ff.png)
 
+### Conclusion
+
+| **Insights from data analysis**                                                                         | **Application for company**                                              | 
+|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| Customer codes IJ01, IT23, IK11 and IT04 are the top most profitable customers                                  | The company can target to increase retention and encourage repeat transactions from these customers through the customer loyalty program |
+| Products with StkISN 10126, 43513, 41534 are the top most profitable products                                   | The company can maintain high stocks of these products and target to increase the sales of these products in the customer loyalty program | 
+| Popular products with StkISN 10074 and 45869 have a large gap between profit and its high quantity sold         | The company can raise the prices of these products by a tiny margin since it can result in an exponential increase in profits | 
+| Indonesia, Singapore and Malaysia have the most important customer base                                         | The company can redirect resources from Australia and Finland to set their regional focus in SEA instead |
+| There are increases in monthly revenue from February to March, April to May, November to December               | The company should stock up on high-demand items in these high sales seasons |
+| Based on current demand and revenue trends for the top 5 most sold and profitable stock, a forecast was created | The company can stock up their inventory for these top 5 most sold and profitable stock based on the forecasted demand and revenue in future time periods |
 
 
 
