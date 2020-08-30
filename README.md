@@ -56,3 +56,12 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Presence of transactions with ‘TUPrice’, ‘ODAmt’ and ‘Amt’ = 0 with a negative worth value
   - These transactions might be an indication of an existing customer loyalty program, and that these goods were gifts redeemed by customers for free
   - This deduction would later be corroborated by the findings under analysis of customer profitability, where those highly profitable business customers would be the same companies that redeemed the free gifts (matching the ‘CustomerCode’ of these transactions)
+  
+### Data Analysis
+- Objective of Analysis
+  - Customer Buying Pattern
+    - To understand the buying patterns of the customers, in each time period, that are most likely to increase profits with the implementation of a customer loyalty program.
+  - Geographical Distribution
+    - To locate the geographical distribution of customers, in each time period, by profitability so as to decide upon a regional focus for the company.
+  - Stock Up Timings
+    - To identify the ideal stock up timings to increase profits based on seasonality and customer buying pattern.
