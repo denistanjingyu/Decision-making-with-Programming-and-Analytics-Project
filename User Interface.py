@@ -1,3 +1,5 @@
+"""User interface."""
+
 # Import libraries
 import warnings
 warnings.simplefilter(action = 'ignore', 
