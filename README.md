@@ -51,3 +51,8 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Created a class CheckColumns() to check for the number of unique values in each column and their suitability to be converted to categorical types
 - Deleted all transactions with all 4 values of ‘TUPrice’, ‘ODAmt’, ‘Amt’ and ‘Worth’ being equal to zero, as we could not meaningfully substitute these values for the mean or median, without at least one other present dollar value
 - Final clean dataset is then saved and exported as ‘Clean_stockcards.csv’ with a total of 55,169 transactions
+
+#### Interesting Findings from Data Cleaning
+- Presence of transactions with ‘TUPrice’, ‘ODAmt’ and ‘Amt’ = 0 with a negative worth value
+  - These transactions might be an indication of an existing customer loyalty program, and that these goods were gifts redeemed by customers for free
+  - This deduction would later be corroborated by the findings under analysis of customer profitability, where those highly profitable business customers would be the same companies that redeemed the free gifts (matching the ‘CustomerCode’ of these transactions)
