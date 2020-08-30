@@ -24,3 +24,6 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Data Analysis
 - Command Line User Interface
 - Conclusion
+
+### Problem Understanding
+
