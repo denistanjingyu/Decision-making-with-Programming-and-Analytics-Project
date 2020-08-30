@@ -206,6 +206,25 @@ summarizes the data appropriate for reading, statistical summary could also be a
   | 2     | Selection of transaction variables to analyse           | The program will focus on variables useful for New Ocean Trading’s business objectives                    |
   | 3     | Summary and analysis of variables                       | Create functions that will display summary, trends and insights on important elements in variables        |
   | 4     | Different view options for the summaries and analysis   | Include additional view options that allow users better visualisation like graphs or descriptive statistic|
+  
+- UI menu for dataset selection by time frame
+
+  ![image](https://user-images.githubusercontent.com/45563371/91669251-0dcd0700-eb46-11ea-9790-1053b142647d.png)
+  
+- UI Main Menu for exploration of transactional records
+
+  ![image](https://user-images.githubusercontent.com/45563371/91669264-2806e500-eb46-11ea-8ad8-c1522dba82e2.png)
+
+- Descriptive Statistic - Output for Financial Trends Function
+
+  ![image](https://user-images.githubusercontent.com/45563371/91669272-33f2a700-eb46-11ea-9271-8fcf32590199.png)
+  
+- Graphical View - Output for Transaction Trends Function
+
+  ![image](https://user-images.githubusercontent.com/45563371/91669280-44a31d00-eb46-11ea-9c67-3eefc70948ff.png)
+
+
+
 
    
 
