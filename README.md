@@ -16,3 +16,11 @@ Mike, CFO from New Ocean Trading, has long struggled to make sense out of the le
  3. Analyse the data appropriately to help with understanding customer buying patterns, geographical distribution of transactions, stocks item analysis and forecast. Mike would like to use these understanding to establish appropriate customer loyalty program, decide upon regional focus, and guide future stock up timing. Mike would like to see analysis based on the last 5 years of data. 
  4. Create a command line user interface which allows user to query data from stockcards data file. The query should allow user to extract information related to certain variable(s). The query results from data file are then displayed on the command prompt. The view option 
 summarizes the data appropriate for reading, statistical summary could also be adopted to summarize the data. The program allows for viewing up to 5 years’ data. You can decide on appropriate views that may be relevant to Mike.  
+
+## Approach
+- Problem Understanding
+- Data Format
+- Data Cleaning
+- Data Analysis
+- Command Line User Interface
+- Conclusion
