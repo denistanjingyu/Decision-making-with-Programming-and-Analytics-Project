@@ -26,4 +26,11 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Conclusion
 
 ### Problem Understanding
+- Presented with a set of transactional record data from New Ocean Trading, a company that has not been relying on programming analytics to make business decisions
+- Make use of Python Programming to create an interactive program that can analyse the transactional records and present the company, through a simple user interface, with analysis and insights to guide their business decisions
+- Company’s business focus would be to establish a customer loyalty program to retain customers and encourage higher spending, decide upon regional focus and forecast stock up timings
+- Analysis was done on data 5 years from the last transaction date, from 2014-04-27 to 2019-04-27
 
+### Data Format
+- CSV
+ - Compact
