@@ -80,4 +80,9 @@ summarizes the data appropriate for reading, statistical summary could also be a
    - Profit Analysis by Periods
    
      ![image](https://user-images.githubusercontent.com/45563371/91668741-82517700-eb41-11ea-99f7-4b8c1bcb1492.png)
-
+     
+     - Observation
+       - There was a significant decrease in profits of $557,667 from period 3 to 4, and a decrease of $137,141 from period 4 to 5. This is despite the increasing revenue amounts, which grew from $10m in period 4 to more than $11m in period 5. 
+       - Moreover, from period 3 onwards, there was a declining trend in profit percentages from 18.83% to 13.88% which indicates that customers are purchasing more products that have lower profitability margin while purchasing lower quantities of high-margin products. Products could also have rising overall costs to sell.
+     - Impact on Customer Loyalty Program
+       - New Ocean Trading can encourage the sales of higher margin products to customers through trade and shipping discounts or promotions, provide higher tier rewards to customers who purchase high-margin products and lower tier rewards to customers who purchase low-margin products.
