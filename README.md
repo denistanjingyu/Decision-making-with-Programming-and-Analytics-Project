@@ -20,7 +20,7 @@ summarizes the data appropriate for reading, statistical summary could also be a
 ## Approach
 - Problem Understanding
 - Data Format
-- Data Cleaning
+- Data Cleaning/Preprocessing
 - Data Analysis
 - Command Line User Interface
 - Conclusion
@@ -33,4 +33,21 @@ summarizes the data appropriate for reading, statistical summary could also be a
 
 ### Data Format
 - CSV
- - Compact
+  - Compact and storage savings can be significant for large datasets
+  - More accessible to a majority of business users
+  - Dataset that we are dealing with has a strict tabular structure and data types are always known beforehand
+  
+### Data Cleaning/Preprocessing
+- Many inconsistencies such as zero values and missing values
+- Join ‘stockcards.csv’ and ‘cat_class.json’ datasets on the Stock Internal serial number information
+- Removed spaces from the column names
+- Replaced all other forms of currency inputs such as ‘SIN’, ‘US’, ‘US$’, and ‘USD’ to the respective standard codes, and filled in missing values of ‘Cur’ with ‘S$’
+- For the ‘CustomerCode’ column, missing values were filled with ‘CASH’, referring to walk in non-regular customers, and capitalised the whole column to resolve wrong inputs of lower cases
+- After removing null values of 547 rows, 55,539 rows of transactions were left 
+- Extracted the year, month, and day information from ‘Date’ into separate columns for easier analysis
+- Standardised the values for ‘TUPrice’, ‘ODAmt’ and ‘Amt’ to contain only positive values
+- Created a quantity (by taking ‘ODAmt’ / ‘TUPrice’) and profit (‘Amt’ - ‘Worth’) column 
+- Trimmed whitespace from data elements to avoid any potential problems with seemingly similar values being polluted by trailing whitespace, which would then be parsed and wrongly used as input to something else
+- Created a class CheckColumns() to check for the number of unique values in each column and their suitability to be converted to categorical types
+- Deleted all transactions with all 4 values of ‘TUPrice’, ‘ODAmt’, ‘Amt’ and ‘Worth’ being equal to zero, as we could not meaningfully substitute these values for the mean or median, without at least one other present dollar value
+- Final clean dataset is then saved and exported as ‘Clean_stockcards.csv’ with a total of 55,169 transactions
