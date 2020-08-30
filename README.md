@@ -178,5 +178,26 @@ summarizes the data appropriate for reading, statistical summary could also be a
        - The company should try to convert walk in non-regular customers, who may purchase intermittently, into registered customers who trade regularly with New Ocean Trading so as to improve their profitability. Sign-up rewards can be provided to encourage these businesses to join the loyalty program and become regular customers. Otherwise, the company can offer discounts on high-margin products for walk-in customers who pay in cash to increase the profitability of this group.
        - New Ocean Trading could provide specific shipping discounts in Southeast Asia, to further attract customers from emerging economies within the region, such as the -       Philippines, Thailand and Vietnam. Customers can also be rewarded when they introduce other businesses to deal with New Ocean Trading.
        - The rewards provided through the loyalty program should also be based on the unique culture of each country. Malaysia and Indonesia and majority Muslim populated countries, hence seasonal rewards could be introduced inline with the cultural festive celebrations such as Hari Raya Haji and Hari Raya Puasa. New Ocean Trading can also partner with third-party firms from each country to provide locally customised rewards, and to ensure speedy delivery of physical rewards to their business customers.
+     - Impact on Stock Up Timing
+       - New Ocean Trading should expand on their lineup of commodities and exports traded in Southeast Asia, targeting goods like palm oil which is a popular export of Malaysia and Indonesia. 
+       - Additionally, as Malaysia and Indonesia are Muslim populated countries, and Singapore is a Chinese-majority country, the company can anticipate the rise in popularity of certain goods during the respective seasonal festivities in the region, such as red fabric during Chinese New Year, and honey dates during Hari Raya, thus ensure stock up of these items before the festivities.
+
+   - Forecast of Revenue and Quantity of Stocks
+     
+     ![image](https://user-images.githubusercontent.com/45563371/91669075-9fd41000-eb44-11ea-8f2a-f04ff717f7ef.png)
+     
+     ![image](https://user-images.githubusercontent.com/45563371/91669079-ab273b80-eb44-11ea-8c1d-6fabb4cf95c6.png)
+     
+     - Impact on Stock Up Timing
+       - Forecasted the general quantities of all stock sold for the upcoming years. 
+       - From this, New Ocean Trading can observe the forecast for upcoming quantity of stocks sold in each period to estimate the general number of all items to stock up in anticipation of the upcoming demand.
+       - Due to their significance and high impact on the company’s revenue and profits, forecasted the quantities of stock sold for the top 5 most sold stocks, as well as the top 5 most profitable stocks. For example, for product StkISN 10074, demand starts to peak during 2019 Q3 at 88,000 predicted quantity sold, hence the company can begin stock up in 2019 Q2. This is to avoid stock out costs of:
+1) Missing out on sales of profitable products
+2) Potentially losing sales or losing customers due to unavailability of popular products.
+       - New Ocean Trading can follow the forecast and stock up before every peak in quantities sold.
+
+
+
+   
 
     
