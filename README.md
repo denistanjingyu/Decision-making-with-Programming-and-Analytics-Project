@@ -65,3 +65,14 @@ summarizes the data appropriate for reading, statistical summary could also be a
     - To locate the geographical distribution of customers, in each time period, by profitability so as to decide upon a regional focus for the company.
   - Stock Up Timings
     - To identify the ideal stock up timings to increase profits based on seasonality and customer buying pattern.
+
+- Analysis Charts & Visualisation
+  - To fulfil the data analysis for the last 5 years, the periods were grouped as follows, based on the last transaction date on 27 April 2019
+    
+     |**Period**|    **From Date - To Date**    |
+     |----------|-------------------------------|
+     | Period 1 | 28 April 2014 - 27 April 2015 |
+     | Period 2 | 28 April 2015 - 27 April 2016 |
+     | Period 3 | 28 April 2016 - 27 April 2017 | 
+     | Period 4 | 28 April 2017 - 27 April 2018 |
+     | Period 5 | 28 April 2018 - 27 April 2019 |
