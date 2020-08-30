@@ -1,4 +1,4 @@
-"""User interface."""
+"""Command line user interface which allows user to query data."""
 
 # Import libraries
 import warnings
