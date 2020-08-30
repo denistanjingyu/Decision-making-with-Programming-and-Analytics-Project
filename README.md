@@ -98,3 +98,40 @@ summarizes the data appropriate for reading, statistical summary could also be a
        - High-margin products can also be promoted more during March, May and December to take advantage of the high spending behaviour of customers.
      - Impact on Stock Up Timing
        - March, May and December are high revenue months, hence the company should begin stocking up popular items in the prior months during February, April and November, in preparation for upcoming high demand.
+
+   - Profit by Customer and Period
+   
+     ![image](https://user-images.githubusercontent.com/45563371/91668838-72866280-eb42-11ea-81e2-abd4ff58a86d.png)
+     
+     - Observation
+       - Customers IJ01, IT23, IK11 and IT04 etc. are consistently the most profitable customers for New Ocean Trading.
+     - Impact on Customer Loyalty Program
+       - Highly customised rewards can be provided for these customers, such as a VIP tier. 
+       - Preferential treatment should be conferred such as priority of shipping order and delivery to these customers. This will help to increase retention and maintain a close and intimate relationship with them, encouraging repeat and higher volume transactions.
+    
+   - Cluster Analysis
+     
+     ![image](https://user-images.githubusercontent.com/45563371/91668858-9e094d00-eb42-11ea-8f75-4282b5d264e2.png)
+     
+     - Observation 1 
+       - Across the 5 periods, the two biggest clusters of customers are always centered around quantity of less than 10,000 and profit of around $50,000. 
+       - The majority of customers are low quantity and low profit customers which implies that they are buying a relatively small number of stocks that bring low levels of profit to the company. 
+     - Impact on Customer Loyalty Program
+       - The customer loyalty program can be targeted at these customers to increase both quantity and profits generated from them. 
+       - To increase profits, the company can promote the sales of higher profitability stocks
+       
+     ![image](https://user-images.githubusercontent.com/45563371/91668879-d872ea00-eb42-11ea-96a8-dfde91d44d01.png)
+     
+     - Observation 2
+       - Presence of an outlier cluster: walk in non-regular customers (CASH). Walk in non-regular customers generally have quantity of less than 50,000 and loss of more than $300,000. They are low quantity and negative profit customers which implies that they are buying a relatively small quantity of stock that does not lead to profits for the company.          - The customers are purchasing stocks that are sold at a loss, where the selling price does not cover the cost price. 
+     - Impact on Customer Loyalty Program
+       - The company can also implement sign-up rewards to encourage these businesses to join the loyalty program and become regular customers. 
+       - The customer loyalty program can then be targeted to increase sales of more profitable products amongst this group of customers. 
+       - Discounts on the more profitable products may help to convert customers who are already purchasing similar items to these products instead.
+     - Observation 3
+       - Presence of another outlier cluster: customers with customer code IJ01. 
+       - Customers with code IJ01 are from Indonesia and generally have quantity of more than 500,000 and profits of more than $450,000. They are high quantity and high profit customers which implies that they are buying relatively high quantity of stock and that leads to high profits for the company. 
+     - Impact on Customer Loyalty Program 
+       - One of the goals of the customer loyalty program would be to lead more customers into this high quantity and high profits cluster. 
+       - Through active engagement and promotion of the benefits of the VIP tier, existing customers could be incentivised to increase their purchase and reach the VIP tier.
+
