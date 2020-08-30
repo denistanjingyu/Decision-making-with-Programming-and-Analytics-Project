@@ -234,8 +234,7 @@ summarizes the data appropriate for reading, statistical summary could also be a
 | There are increases in monthly revenue from February to March, April to May, November to December               | The company should stock up on high-demand items in these high sales seasons |
 | Based on current demand and revenue trends for the top 5 most sold and profitable stock, a forecast was created | The company can stock up their inventory for these top 5 most sold and profitable stock based on the forecasted demand and revenue in future time periods |
 
-
-
-   
-
-    
+## Code and Resources Used
+- Python 3.6
+- Packages: pandas, numpy, os, datetime, matplotlib, seaborn, sklearn, dateutil
+- Tableau
