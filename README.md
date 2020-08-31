@@ -4,6 +4,12 @@
 
 - [Project Statement](#project-statement)
 - [Approach](#approach)
+  - [Problem Understanding](#problem-understanding)
+  - [Data Format](#data-format)
+  - [Data Cleaning/Preprocessing](#data-cleaningpreprocessing)
+  - [Data Analysis](#data-analysis)
+  - [Command Line User Interface](#command-line-user-interface)
+  - [Conclusion](#conclusion)
 - [Code and Resources Used](#code-and-resources-used)
 
 ## Project Statement
