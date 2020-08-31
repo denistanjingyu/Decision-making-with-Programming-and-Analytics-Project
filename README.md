@@ -51,8 +51,13 @@ summarizes the data appropriate for reading, statistical summary could also be a
   - Compact and storage savings can be significant for large datasets
   - More accessible to a majority of business users
   - Dataset that we are dealing with has a strict tabular structure and data types are always known beforehand
+
+
   
 ### Data Cleaning/Preprocessing
+<details open>
+<summary>Main steps taken to clean and preprocess data</summary>
+<br>
 - Many inconsistencies such as zero values and missing values
 - Join ‘stockcards.csv’ and ‘cat_class.json’ datasets on the Stock Internal serial number information
 - Removed spaces from the column names
@@ -66,6 +71,7 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Created a class CheckColumns() to check for the number of unique values in each column and their suitability to be converted to categorical types
 - Deleted all transactions with all 4 values of ‘TUPrice’, ‘ODAmt’, ‘Amt’ and ‘Worth’ being equal to zero, as we could not meaningfully substitute these values for the mean or median, without at least one other present dollar value
 - Final clean dataset is then saved and exported as ‘Clean_stockcards.csv’ with a total of 55,169 transactions
+</details>
 
 #### Interesting Findings from Data Cleaning
 - Presence of transactions with ‘TUPrice’, ‘ODAmt’ and ‘Amt’ = 0 with a negative worth value
