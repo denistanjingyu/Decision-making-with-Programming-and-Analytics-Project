@@ -32,6 +32,9 @@ summarizes the data appropriate for reading, statistical summary could also be a
 - Analysis was done on data 5 years from the last transaction date, from 2014-04-27 to 2019-04-27
 
 ### Data Format
+
+![image](https://user-images.githubusercontent.com/45563371/91745308-58558e80-ebed-11ea-8fe1-6ba0dc726fe6.png)
+
 - CSV
   - Compact and storage savings can be significant for large datasets
   - More accessible to a majority of business users
