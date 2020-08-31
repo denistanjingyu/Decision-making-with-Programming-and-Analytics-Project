@@ -2,6 +2,8 @@
 
 ![0_F6QUIiDYKcqGVCF_](https://user-images.githubusercontent.com/45563371/89464486-26ded400-d7a3-11ea-9447-fbb5b147ef8f.jpg)
 
+Table of Contents
+=================
 - [Project Statement](#project-statement)
 - [Approach](#approach)
   - [Problem Understanding](#problem-understanding)
