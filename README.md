@@ -52,12 +52,11 @@ summarizes the data appropriate for reading, statistical summary could also be a
   - More accessible to a majority of business users
   - Dataset that we are dealing with has a strict tabular structure and data types are always known beforehand
 
-
-  
 ### Data Cleaning/Preprocessing
 <details open>
 <summary>Main steps taken to clean and preprocess data</summary>
 <br>
+  
 - Many inconsistencies such as zero values and missing values
 - Join ‘stockcards.csv’ and ‘cat_class.json’ datasets on the Stock Internal serial number information
 - Removed spaces from the column names
