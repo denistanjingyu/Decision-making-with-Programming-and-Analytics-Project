@@ -1199,7 +1199,7 @@ def financial_trend():
         print("""Customer Financial Trends
 ==========================================================================
 {}
-==========================================================================""".format(df.to_string(index=False)))
+==========================================================================""".format(df.to_string(index = False)))
 
         g_choice2 = graph_choice()
         if g_choice2 == 1:
