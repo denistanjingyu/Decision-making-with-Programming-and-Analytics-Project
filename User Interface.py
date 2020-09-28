@@ -440,7 +440,7 @@ def cust_summary():
         print("""Customer Information Summary 
                                                     Frequency Table
 ==========================================================================================================================
-{}""".format(df7.to_string(index=False)))
+{}""".format(df7.to_string(index = False)))
         returnmain()
 
     elif choice2 == 2:
@@ -472,7 +472,7 @@ def cust_summary():
         print("""Customer Information Summary
                                                         Frequency Table
 =====================================================================================================================================
-        {}""".format(df7.to_string(index=False)))
+        {}""".format(df7.to_string(index = False)))
         returnmain()
 
 
@@ -534,7 +534,7 @@ Number of Transactions (NoT)
 Transaction Size ~ Quantity Purchased per StockISN (QP per S)
 ===============================================================================================================
 {}
-===============================================================================================================""".format(df.to_string(index=False)))
+===============================================================================================================""".format(df.to_string(index = False)))
 
         g_choice2 = graph_choice()
         if g_choice2 == 1:
