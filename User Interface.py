@@ -1559,7 +1559,6 @@ Input here-> """))
    returnmain()
 
 # ------------------------------------ CUSTOMER REGION -------------------------------------
-
 def regional_analysis():
     # Convert all inf to nan values and remove those nans
     regional_data = data[data.replace([np.inf, 
