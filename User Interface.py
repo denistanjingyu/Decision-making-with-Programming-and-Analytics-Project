@@ -1026,7 +1026,7 @@ Purchase Variety ~ Quantity Purchased Per StockISN (QP per StockISN)
         mode_NoUS = list(dataset.groupby(dataset.CustomerCode).StockISN.nunique().mode())
 
         NoStkType_Qty = dataset.groupby("CustomerCode").StockISN.nunique().to_frame()
-        NoStkType_Qty = NoStkType_Qty.rename(columns={"StockISN": 'NoStkType'})
+        NoStkType_Qty = NoStkType_Qty.rename(columns = {"StockISN": 'NoStkType'})
         dataset_Quantity = pd.DataFrame(dataset.groupby("CustomerCode").Quantity.sum())
         dataset_Quantity = dataset_Quantity[dataset_Quantity.replace([np.inf, 
                                                                       -np.inf], 
