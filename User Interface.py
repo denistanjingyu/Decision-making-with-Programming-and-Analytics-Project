@@ -288,7 +288,7 @@ def financial_overview():
                  'Total Profit (S$)']]
         print("""Financial Overview
 =============================================================================
-{}""".format(df.to_string(index=False)))
+{}""".format(df.to_string(index = False)))
 
         g_choice2 = graph_choice()
         if g_choice2 == 1:
@@ -462,13 +462,13 @@ def cust_summary():
         df5 = dataset.groupby([dataset.Year, dataset.Month, dataset.Cur])["Cur"].agg({"Count": "count"})
         df5["Year-Month"] = [str(df5.index[i][0]) + '-' + str(df5.index[i][1]) for i in range(len(df5))]
         df5['Cur'] = df5.index.get_level_values('Cur')
-        df6 = df5.pivot(index='Year-Month', columns='Cur', values='Count')
-        df7 = df4.merge(df6, left_on='Year-Month', right_on='Year-Month')
-        df7.rename(columns={'ICG': 'ICG Transactions',
-                            'ICX': 'ICX Transactions',
-                            'M$': "Transactions in M$",
-                            'S$': "Transactions in S$",
-                            'USD$': "Transactions in USD$"}, inplace=True)
+        df6 = df5.pivot(index = 'Year-Month', columns = 'Cur', values = 'Count')
+        df7 = df4.merge(df6, left_on = 'Year-Month', right_on = 'Year-Month')
+        df7.rename(columns = {'ICG': 'ICG Transactions',
+                              'ICX': 'ICX Transactions',
+                              'M$': "Transactions in M$",
+                              'S$': "Transactions in S$",
+                              'USD$': "Transactions in USD$"}, inplace = True)
         print("""Customer Information Summary
                                                         Frequency Table
 =====================================================================================================================================
