@@ -48,7 +48,7 @@ Please choose 1, 2 or 3"""))
                 print("\n")
                 data = clean_csv.loc[clean_csv.Date >= start_date]
                 print(data)
-                print("Here are the data you requested from {} to {}.".format(start_date, last_date))
+                print(f"Here are the data you requested from {start_date} to {last_date}.")
 
             elif i_pref == 2:
                 # Keep prompting user for min and max year till he get both inputs right
@@ -56,8 +56,14 @@ Please choose 1, 2 or 3"""))
                     try:
                         max_date = max(clean_csv.Date)
                         min_date = min(clean_csv.Date)
-                        cmin = input("Choose your start date in YYYY-MM-DD format (Earliest Transaction = {})".format(min_date)).strip()
-                        cmax = input("Choose your end date in YYYY-MM-DD format (Last Transaction = {})".format(max_date)).strip()
+                        cmin = input(
+                            f"Choose your start date in YYYY-MM-DD format (Earliest Transaction = {min_date})"
+                        ).strip()
+
+                        cmax = input(
+                            f"Choose your end date in YYYY-MM-DD format (Last Transaction = {max_date})"
+                        ).strip()
+
                         cmin = pd.to_datetime(cmin, format='%Y-%m-%d').date()
                         cmax = pd.to_datetime(cmax, format='%Y-%m-%d').date()
                         if cmin < min_date:
@@ -73,27 +79,25 @@ Please choose 1, 2 or 3"""))
                         else:
                             data = clean_csv[(clean_csv.Date >= cmin) & (clean_csv.Date <= cmax)]
                             print(data)
-                            print("Here are the data you requested from {} to {}.".format(cmin, cmax))
+                            print(f"Here are the data you requested from {cmin} to {cmax}.")
                             break
                     except ValueError:
-                        print("Please input only valid years between {} to {}".format(min_date, max_date))
+                        print(f"Please input only valid years between {min_date} to {max_date}")
                         continue
 
-            # Exit the program
             elif i_pref == 3:
                 print("Program will proceed to end!")
                 break
 
-            # Number not 1, 2 or 3
             elif i_pref not in range(1, 4):
                 print("Please choose 1, 2 or 3 only.")
                 continue
             # Ask user whether the data is correct
             try:
                 correct_data = input("Is this the dataset you want? [Y/N]")
-                if correct_data == 'n' or correct_data == 'N':
+                if correct_data in ['n', 'N']:
                     continue
-                elif correct_data == 'y' or correct_data == 'Y':
+                elif correct_data in ['y', 'Y']:
                     print("We will proceed with this dataset.")
                     ChoosingMenu()
                     break
@@ -103,7 +107,6 @@ Please choose 1, 2 or 3"""))
             except (IndexError, ValueError, TypeError):
                 print("Please enter only y/n!")
                 continue
-        # Exception handling
         except (IndexError, ValueError, TypeError):
             print("I do not understand your input, please try again. Choose 1, 2 or 3 only.")
             continue
@@ -220,9 +223,9 @@ Do you want to see in in graphical format?
 1) Yes
 2) No
 Input here-> """))
-            if g_choice in (1, 2):
+            if g_choice in {1, 2}:
                 break
-            elif g_choice not in (1, 2):
+            else:
                 print("Please enter 1 or 2.")
         except ValueError:
             print("Please enter 1 or 2.")
@@ -239,9 +242,9 @@ What do you want to group the dataset by?
 2) Year and Months
 3) NIL
 Input here-> """))
-            if choice in (1, 2, 3):
+            if choice in {1, 2, 3}:
                 break
-            elif choice not in (1, 2, 3):
+            else:
                 print("Please enter 1, 2 or 3.")
         except ValueError:
             print("Please enter 1, 2 or 3.")
@@ -255,9 +258,9 @@ def cluster_choice():
 1) Yes
 2) No
 Input here-> """))
-            if choice in (1, 2):
+            if choice in {1, 2}:
                 break
-            elif choice not in (1, 2):
+            else:
                 print("Please enter 1 or 2.")
         except ValueError:
             print("Please enter 1 or 2.")
@@ -293,40 +296,40 @@ def financial_overview():
         g_choice2 = graph_choice()
         if g_choice2 == 1:
             df["Total Cost of Goods Sold (S$)"] = abs(df["Total Cost of Goods Sold (S$)"])
-            
+
             sns.lineplot(x = "Year", 
                          y = "Total Revenue (S$)", 
                          data = df, 
                          marker = "8")
-            
+
             sns.lineplot(x = "Year", 
                          y = "Total Cost of Goods Sold (S$)", 
                          data = df, 
                          marker = "8")
-            
+
             sns.lineplot(x = "Year", 
                          y = "Total Profit (S$)", 
                          data = df, 
                          marker = "8")
-            
+
             plt.ticklabel_format(style = 'plain', 
                                  axis = 'y')
-            
+
             plt.legend(labels = ['Total Revenue', 
                                  'Absolute Value of Total Cost of Goods Sold', 
                                  'Total Profit'], 
                        loc = 1, 
                        prop = {'size': 8})
-            
+
             plt.ylabel("Singapore Dollars (S$)")
-            
-            plt.suptitle("Financial Overview by Year: {} to {}".format(min(dataset.Date), 
-                                                                       max(dataset.Date)), 
-                         fontsize = 13)
+
+            plt.suptitle(
+                f"Financial Overview by Year: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=13,
+            )
+
             plt.show()
-            returnmain()
-        else:
-            returnmain()
+        returnmain()
     elif choice2 == 2:
         dataset = data.copy()
         df = dataset.groupby([dataset.Year, 
@@ -335,7 +338,11 @@ def financial_overview():
         df.rename(columns = {'Amt': 'Total Revenue (S$)', 
                              'Worth': 'Total Cost of Goods Sold (S$)'}, 
                   inplace = True)
-        df["Year-Month"] = [str(df.index[i][0]) + '-' + str(df.index[i][1]) for i in range(len(df))]
+        df["Year-Month"] = [
+            f'{str(df.index[i][0])}-{str(df.index[i][1])}'
+            for i in range(len(df))
+        ]
+
         df = df[['Year-Month', 'Total Revenue (S$)', 'Total Cost of Goods Sold (S$)', 'Total Profit (S$)']]
         print("""Financial Overview
 =============================================================================
@@ -349,20 +356,20 @@ def financial_overview():
                          y = "Total Revenue (S$)", 
                          data = df, 
                          marker = "8").set_xticklabels(df["Year-Month"])
-            
+
             sns.lineplot(x = np.arange(len(df)), 
                          y = "Total Cost of Goods Sold (S$)", 
                          data = df, 
                          marker="8").set_xticklabels(df["Year-Month"])
-            
+
             sns.lineplot(x = np.arange(len(df)), 
                          y = "Total Profit (S$)", 
                          data = df, 
                          marker = "8").set_xticklabels(df["Year-Month"])
-            
+
             plt.ticklabel_format(style = 'plain', 
                                  axis = 'y')
-            
+
             plt.legend(labels=['Total Revenue', 
                                'Absolute Value of Total Cost of Goods Sold', 
                                'Total Profit'], 
@@ -370,13 +377,13 @@ def financial_overview():
                        prop = {'size': 8})
             plt.ylabel("Singapore Dollars (S$)")
             plt.xlabel("Year-Month")
-            plt.suptitle("Financial Overview by Year-Month: {} to {}".format(min(dataset.Date), 
-                                                                             max(dataset.Date)),
-                         fontsize = 13)
+            plt.suptitle(
+                f"Financial Overview by Year-Month: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=13,
+            )
+
             plt.show()
-            returnmain()
-        else:
-            returnmain()
+        returnmain()
     elif choice2 == 3:
         dataset = data.copy()
         df = dataset[["Amt", "Worth"]].agg("sum").round(2)
@@ -408,33 +415,33 @@ def cust_summary():
         # Number of Transaction Type
         df2 = dataset.groupby([dataset.Year, 
                                dataset.Type])["Type"].agg({"Count" : "count"}).reset_index()
-        
+
         df3 = df2.pivot(index = 'Year', 
                         columns = 'Type', 
                         values = 'Count')
-        
+
         df4 = df.merge(df3, 
                        left_on = 'Year', 
                        right_on = 'Year')
 
         # Number of Cur Type
         df5 = dataset.groupby([dataset.Year, dataset.Cur])["Cur"].agg({"Count": "count"}).reset_index()
-        
+
         df6 = df5.pivot(index = 'Year', 
                         columns = 'Cur', 
                         values = 'Count')
-        
+
         df7 = df4.merge(df6, 
                         left_on = 'Year', 
                         right_on = 'Year')
-        
+
         df7.rename(columns = {'ICG': 'ICG Transactions',
                               'ICX': 'ICX Transactions',
                               'M$': "Transactions in M$",
                               'S$': "Transactions in S$",
                               'USD$': "Transactions in USD$"}, 
                    inplace = True)
-        
+
         df7.reset_index(level = 0, 
                         inplace = True)
         print("""Customer Information Summary 
@@ -448,19 +455,31 @@ def cust_summary():
 
         # Number of Customers
         df = dataset.groupby([dataset.Year, dataset.Month])["CustomerCode"].agg({'Unique Customers': "nunique"})
-        df["Year-Month"] = [str(df.index[i][0]) + '-' + str(df.index[i][1]) for i in range(len(df))]
+        df["Year-Month"] = [
+            f'{str(df.index[i][0])}-{str(df.index[i][1])}'
+            for i in range(len(df))
+        ]
+
         df = df[['Year-Month', 'Unique Customers']]
 
         # Number of Transaction Type
         df2 = dataset.groupby([dataset.Year, dataset.Month, dataset.Type])["Type"].agg({"Count": "count"})
-        df2["Year-Month"] = [str(df2.index[i][0]) + '-' + str(df2.index[i][1]) for i in range(len(df2))]
+        df2["Year-Month"] = [
+            f'{str(df2.index[i][0])}-{str(df2.index[i][1])}'
+            for i in range(len(df2))
+        ]
+
         df2['Type'] = df2.index.get_level_values('Type')
         df3 = df2.pivot(index='Year-Month', columns='Type', values='Count')
         df4 = df.merge(df3, left_on='Year-Month', right_on='Year-Month')
 
         # Number of Cur Type
         df5 = dataset.groupby([dataset.Year, dataset.Month, dataset.Cur])["Cur"].agg({"Count": "count"})
-        df5["Year-Month"] = [str(df5.index[i][0]) + '-' + str(df5.index[i][1]) for i in range(len(df5))]
+        df5["Year-Month"] = [
+            f'{str(df5.index[i][0])}-{str(df5.index[i][1])}'
+            for i in range(len(df5))
+        ]
+
         df5['Cur'] = df5.index.get_level_values('Cur')
         df6 = df5.pivot(index = 'Year-Month', columns = 'Cur', values = 'Count')
         df7 = df4.merge(df6, left_on = 'Year-Month', right_on = 'Year-Month')
@@ -481,7 +500,7 @@ def cust_summary():
         print("""Customer Information Summary
 =======================================""")
         No_Cust = len(dataset.groupby(["CustomerCode"]))
-        print("Number of Unique Customers = {}".format(No_Cust))
+        print(f"Number of Unique Customers = {No_Cust}")
         print("---------------------------------------")
         No_TransCur = dataset.loc[:, ["Cur"]].groupby(["Cur"]).size().reset_index(name='Count').to_string(index=None)
         print("""Frequency of Transactions by Currency
@@ -551,9 +570,11 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                          ax = ax1)
             ax1.set_ylabel("Number of Transactions", 
                            fontsize = 7)
-            ax1.set_title("Customer Number of Transactions across the Years: {} to {}".format(min(dataset.Date), 
-                                                                                              max(dataset.Date)),
-                          fontsize = 9)
+            ax1.set_title(
+                f"Customer Number of Transactions across the Years: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
 
             sns.lineplot(x = "Year", 
                          y = "Median NoT", 
@@ -563,9 +584,11 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                          color = "tomato")
             ax2.set_ylabel("Median Number of Transactions", 
                            fontsize = 7)
-            ax2.set_title("The Average Customer's Number of Transactions across the Years: {} to {}".format(min(dataset.Date), 
-                                                                                                            max(dataset.Date)),
-                          fontsize = 9)
+            ax2.set_title(
+                f"The Average Customer's Number of Transactions across the Years: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
 
             sns.lineplot(x = "Year", 
                          y = "Median QP per S", 
@@ -576,14 +599,13 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             ax3.set_ylabel("Median Quantity Purchased per StockISN", 
                            fontsize = 7)
             ax3.set_title(
-                "The Average Customer's Transaction Size across the Years: {} to {}".format(min(dataset.Date),
-                                                                                            max(dataset.Date)),
-                fontsize = 9)
+                f"The Average Customer's Transaction Size across the Years: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
 
             plt.show()
-            returnmain()
-        else:
-            returnmain()
+        returnmain()
     elif choice2 == 2:
         dataset = data.copy()
         df = pd.DataFrame(columns = ["Year", 
@@ -656,9 +678,11 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                          marker = "8", 
                          ax=ax1).set_xticklabels(df["Year-Month"])
             ax1.set_ylabel("Number of Transactions", fontsize=7)
-            ax1.set_title("Customer Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date), 
-                                                                                                    max(dataset.Date)), 
-                          fontsize = 9)
+            ax1.set_title(
+                f"Customer Number of Transactions across the Year-Months: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
             ax2.set_xticks(np.arange(len(df)))
             sns.lineplot(x = np.arange(len(df)), 
                          y = "Median NoT", 
@@ -669,9 +693,10 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
             ax2.set_ylabel("Median Number of Transactions", 
                            fontsize = 7)
             ax2.set_title(
-                "The Average Customer's Number of Transactions across the Year-Months: {} to {}".format(min(dataset.Date),
-                                                                                                        max(dataset.Date)),
-                fontsize = 9)
+                f"The Average Customer's Number of Transactions across the Year-Months: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
             ax3.set_xticks(np.arange(len(df)))
             sns.lineplot(x = np.arange(len(df)), 
                          y = "Median QP per S", 
@@ -680,20 +705,20 @@ Transaction Size ~ Quantity Purchased per StockISN (QP per S)
                          color = "darkturquoise").set_xticklabels(df["Year-Month"])
             ax3.set_ylabel("Median Quantity Purchased per StockISN", 
                            fontsize = 7)
-            ax3.set_title("The Average Customer's Transaction Size across the Year-Months: {} to {}".format(min(dataset.Date), 
-                                                                                                            max(dataset.Date)),                                         
-                          fontsize = 9)
+            ax3.set_title(
+                f"The Average Customer's Transaction Size across the Year-Months: {min(dataset.Date)} to {max(dataset.Date)}",
+                fontsize=9,
+            )
+
 
             plt.show()
-            returnmain()
-        else:
-            returnmain()
+        returnmain()
     elif choice2 == 3:
         dataset = data.copy()
         print("""Customer Transaction Trends
 ===============================================""")
         No_Trans = len(dataset)
-        print("Total Number of Transactions = {}".format(No_Trans))
+        print(f"Total Number of Transactions = {No_Trans}")
         print("-----------------------------------------------")
         mean_NoTrans = dataset.groupby(dataset.CustomerCode).size().mean()
         median_NoTrans = dataset.groupby(dataset.CustomerCode).size().median()
